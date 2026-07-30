@@ -1,0 +1,50 @@
+---
+import { site, legal, contact } from "../data/site";
+---
+
+<footer class="bg-brown text-cream/90">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 py-12 lg:py-16">
+    <div class="grid gap-10 md:grid-cols-3">
+      <div>
+        <img src="/logo.png" alt={site.name} class="h-14 w-auto mb-4 brightness-0 invert opacity-90" />
+        <p class="text-sm text-cream/70 leading-relaxed max-w-xs">{site.tagline}</p>
+      </div>
+
+      <div>
+        <h3 class="font-serif text-lg text-cream mb-4">Contacto</h3>
+        <ul class="space-y-2 text-sm text-cream/70">
+          <li>
+            <a href={`mailto:${contact.email}`} class="hover:text-cream transition-colors">
+              {contact.email}
+            </a>
+          </li>
+          <li>
+            <a href={`tel:${contact.phone.replace(/\s/g, "")}`} class="hover:text-cream transition-colors">
+              {contact.phone}
+            </a>
+          </li>
+          <li>{contact.location}</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="font-serif text-lg text-cream mb-4">Legal</h3>
+        <ul class="space-y-2 text-sm">
+          {
+            legal.map((link) => (
+              <li>
+                <a href={link.href} class="text-cream/70 hover:text-cream transition-colors">
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-12 pt-8 border-t border-cream/10 text-center text-sm text-cream/50">
+      <p>&copy; {new Date().getFullYear()} {site.name}. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>

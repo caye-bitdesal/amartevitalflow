@@ -1,0 +1,95 @@
+---
+import { nav } from "../data/site";
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-50 bg-cream/90 backdrop-blur-md border-b border-cream-dark">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <div class="flex items-center justify-between h-16 lg:h-20">
+      <a href="/" class="flex items-center shrink-0" aria-label="Am'Arte Vital Flow — Inicio">
+        <img src="/logo.png" alt="Am'Arte Vital Flow" class="h-10 lg:h-12 w-auto" />
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-6 xl:gap-8" aria-label="Principal">
+        {
+          nav.map((item) => (
+            <a
+              href={item.href}
+              class:list={[
+                "text-sm tracking-wide transition-colors hover:text-terracotta",
+                currentPath === item.href || (item.href !== "/" && currentPath.startsWith(item.href))
+                  ? "text-terracotta font-medium"
+                  : "text-brown/80",
+              ]}
+            >
+              {item.label}
+            </a>
+          ))
+        }
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a
+          href="/contacto"
+          class="hidden sm:inline-flex items-center px-5 py-2.5 rounded-full bg-terracotta text-cream text-sm font-medium tracking-wide hover:bg-terracotta/90 transition-colors"
+        >
+          Reserva
+        </a>
+
+        <button
+          type="button"
+          id="menu-toggle"
+          class="lg:hidden p-2 text-brown"
+          aria-label="Abrir menú"
+          aria-expanded="false"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <nav
+    id="mobile-menu"
+    class="lg:hidden hidden border-t border-cream-dark bg-cream"
+    aria-label="Móvil"
+  >
+    <div class="mx-auto max-w-6xl px-4 py-4 flex flex-col gap-1">
+      {
+        nav.map((item) => (
+          <a
+            href={item.href}
+            class:list={[
+              "px-3 py-2.5 rounded-lg text-sm transition-colors",
+              currentPath === item.href
+                ? "bg-cream-dark text-terracotta font-medium"
+                : "text-brown/80 hover:bg-cream-dark",
+            ]}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <a
+        href="/contacto"
+        class="mt-2 inline-flex justify-center px-5 py-2.5 rounded-full bg-terracotta text-cream text-sm font-medium"
+      >
+        Reserva
+      </a>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const toggle = document.getElementById("menu-toggle");
+  const menu = document.getElementById("mobile-menu");
+
+  toggle?.addEventListener("click", () => {
+    const isOpen = !menu?.classList.contains("hidden");
+    menu?.classList.toggle("hidden");
+    toggle.setAttribute("aria-expanded", String(!isOpen));
+  });
+</script>

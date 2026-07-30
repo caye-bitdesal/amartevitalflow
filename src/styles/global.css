@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #f5f0e6;
+  --color-brown: #4a321f;
+  --color-terracotta: #b05123;
+  --color-sage: #727d5c;
+  --color-mustard: #c48d2e;
+  --color-cream-dark: #ebe4d6;
+
+  --font-serif: "Libre Baskerville", Georgia, serif;
+  --font-sans: "Source Sans 3", system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream text-brown font-sans antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-serif;
+  }
+}

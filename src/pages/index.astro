@@ -1,0 +1,189 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ServiceCard from "../components/ServiceCard.astro";
+import TestimonialCarousel from "../components/TestimonialCarousel.astro";
+import {
+  site,
+  intro,
+  manifesto,
+  firstStep,
+  services,
+  whatIs,
+  founder,
+} from "../data/site";
+---
+
+<BaseLayout>
+  <!-- Hero -->
+  <section class="relative min-h-[85vh] flex items-center justify-center px-4 sm:px-6 overflow-hidden">
+    <div class="absolute inset-0" aria-hidden="true">
+      <img
+        src="/hero-bg.png"
+        alt=""
+        class="absolute inset-0 h-full w-full object-cover blur-[0.2rem]"
+      />
+      <div class="absolute inset-0 bg-cream/55"></div>
+    </div>
+
+    <div class="relative text-center max-w-2xl mx-auto py-20">
+      <img
+        src="/logo.png"
+        alt={site.name}
+        class="mx-auto h-40 sm:h-52 lg:h-64 w-auto mb-10"
+      />
+      <p class="font-serif text-xl sm:text-2xl lg:text-[1.65rem] text-brown leading-relaxed mb-10">
+        {site.tagline}
+      </p>
+      <a
+        href="/contacto"
+        class="inline-flex items-center px-8 py-3.5 rounded-full bg-terracotta text-cream font-medium tracking-wide hover:bg-terracotta/90 transition-colors shadow-sm"
+      >
+        Reserva
+      </a>
+    </div>
+  </section>
+
+  <!-- Intro -->
+  <section class="py-20 lg:py-28">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div class="space-y-6">
+          {
+            intro.feelings.map((line) => (
+              <p class="font-serif text-2xl lg:text-3xl text-brown leading-snug">{line}</p>
+            ))
+          }
+          <p class="text-brown/80 leading-relaxed text-lg pt-4">{intro.closing}</p>
+        </div>
+        <div class="relative aspect-[4/5] rounded-[3rem] overflow-hidden bg-gradient-to-br from-sage/30 to-terracotta/20">
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div class="text-center p-8">
+              <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-cream/80 flex items-center justify-center">
+                <svg class="w-12 h-12 text-sage" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 3c-1.5 2-4 4.5-4 8a4 4 0 108 0c0-3.5-2.5-6-4-8z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M8 21c0-3 2-5 4-5s4 2 4 5" />
+                </svg>
+              </div>
+              <p class="text-sm text-brown/60">Imagen placeholder</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Manifesto -->
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6 text-center">
+      <p class="font-serif text-2xl lg:text-3xl text-brown mb-10">{manifesto.lead}</p>
+      <ul class="space-y-3 mb-12">
+        {
+          manifesto.items.map((item) => (
+            <li class="text-lg text-brown/80">{item}</li>
+          ))
+        }
+      </ul>
+      {
+        manifesto.paragraphs.map((p) => (
+          <p class="text-brown/75 leading-relaxed mb-6 text-left lg:text-center">{p}</p>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- First step -->
+  <section class="py-20 lg:py-28">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div class="relative aspect-square rounded-[3rem] overflow-hidden bg-gradient-to-tr from-terracotta/20 via-cream to-sage/30 order-2 lg:order-1">
+          <div class="absolute inset-0 flex items-center justify-center text-brown/40 text-sm">
+            Imagen placeholder
+          </div>
+        </div>
+        <div class="order-1 lg:order-2">
+          <p class="text-brown/70 mb-2">{firstStep.transition}</p>
+          <p class="font-serif text-3xl lg:text-4xl text-terracotta mb-8">{firstStep.highlight}</p>
+          <h2 class="font-serif text-2xl lg:text-3xl text-brown mb-6 leading-snug">
+            {firstStep.title}
+          </h2>
+          {
+            firstStep.body.split("\n\n").map((p) => (
+              <p class="text-brown/75 leading-relaxed mb-4">{p}</p>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="py-20 lg:py-28 bg-cream-dark/30" id="servicios">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="text-center mb-14">
+        <h2 class="font-serif text-3xl lg:text-4xl text-brown mb-4">¿Cómo puedo acompañarte?</h2>
+        <p class="text-brown/70 max-w-xl mx-auto">
+          Tres caminos para reconectar con tu bienestar: comprender, experimentar y expresar.
+        </p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {services.map((service) => <ServiceCard {...service} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- What is -->
+  <section class="py-20 lg:py-28">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <h2 class="font-serif text-3xl lg:text-4xl text-brown text-center mb-8">{whatIs.title}</h2>
+      <p class="font-serif text-xl text-terracotta text-center leading-relaxed mb-10">
+        {whatIs.highlight}
+      </p>
+      {
+        whatIs.paragraphs.map((p) => (
+          <p class="text-brown/75 leading-relaxed mb-6">{p}</p>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Founder -->
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="grid lg:grid-cols-5 gap-12 lg:gap-16 items-start">
+        <div class="lg:col-span-2">
+          <div class="aspect-[3/4] rounded-[3rem] overflow-hidden bg-gradient-to-br from-sage/25 to-mustard/15 flex items-center justify-center">
+            <p class="text-brown/40 text-sm">Foto de Alizé — placeholder</p>
+          </div>
+        </div>
+        <div class="lg:col-span-3">
+          <h2 class="font-serif text-3xl lg:text-4xl text-brown mb-6">{founder.title}</h2>
+          <p class="font-serif text-2xl text-brown mb-1">{founder.name}</p>
+          <p class="text-terracotta italic mb-1">{founder.role}</p>
+          <p class="text-sage text-sm tracking-wide mb-8">{founder.credentials}</p>
+          {
+            founder.paragraphs.map((p, i) => (
+              <p
+                class:list={[
+                  "leading-relaxed mb-4",
+                  i === founder.paragraphs.length - 1
+                    ? "font-medium text-brown text-lg mt-6"
+                    : "text-brown/75",
+                ]}
+              >
+                {p}
+              </p>
+            ))
+          }
+          <a
+            href="/contacto"
+            class="inline-flex mt-8 items-center px-6 py-3 rounded-full bg-sage text-cream text-sm tracking-wide hover:bg-sage/90 transition-colors"
+          >
+            Reserva una sesión
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <TestimonialCarousel />
+</BaseLayout>
