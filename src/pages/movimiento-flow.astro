@@ -1,8 +1,41 @@
 ---
-import ServiceLayout from "../layouts/ServiceLayout.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import VideoHeroCarousel from "../components/VideoHeroCarousel.astro";
+import FlowScheduleCalendar from "../components/FlowScheduleCalendar.astro";
 import { servicePages } from "../data/site";
 
 const page = servicePages.movimientoFlow;
 ---
 
-<ServiceLayout {...page} />
+<BaseLayout title={page.title} description={page.intro}>
+  <VideoHeroCarousel eyebrow={page.eyebrow} videos={page.headerVideos} />
+
+  <section class="py-16 lg:py-24">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <h1 class="font-serif text-4xl lg:text-5xl text-brown mb-6">{page.title}</h1>
+      <p class="text-lg text-brown/80 leading-relaxed mb-12">{page.intro}</p>
+
+      <div class="space-y-10">
+        {
+          page.sections.map((section) => (
+            <article>
+              <h2 class="font-serif text-2xl text-brown mb-4">{section.title}</h2>
+              <p class="text-brown/75 leading-relaxed">{section.body}</p>
+              {"showSchedule" in section && section.showSchedule && <FlowScheduleCalendar />}
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="mt-14 p-8 rounded-3xl bg-cream-dark/50 text-center">
+        <p class="font-serif text-xl text-brown mb-4">¿Te gustaría saber más?</p>
+        <a
+          href="/contacto"
+          class="inline-flex items-center px-6 py-3 rounded-full bg-terracotta text-cream text-sm tracking-wide hover:bg-terracotta/90 transition-colors"
+        >
+          Reserva una sesión
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

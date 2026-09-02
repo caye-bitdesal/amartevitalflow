@@ -9,7 +9,6 @@ import {
   firstStep,
   services,
   whatIs,
-  founder,
 } from "../data/site";
 ---
 
@@ -40,6 +39,21 @@ import {
       >
         Reserva
       </a>
+    </div>
+  </section>
+
+  <!-- What is -->
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <h2 class="font-serif text-3xl lg:text-4xl text-brown text-center mb-8">{whatIs.title}</h2>
+      <p class="font-serif text-xl text-terracotta text-center leading-relaxed mb-10">
+        {whatIs.highlight}
+      </p>
+      {
+        whatIs.paragraphs.map((p) => (
+          <p class="text-brown/75 leading-relaxed mb-6">{p}</p>
+        ))
+      }
     </div>
   </section>
 
@@ -127,60 +141,6 @@ import {
       </div>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {services.map((service) => <ServiceCard {...service} />)}
-      </div>
-    </div>
-  </section>
-
-  <!-- What is -->
-  <section class="py-20 lg:py-28">
-    <div class="mx-auto max-w-3xl px-4 sm:px-6">
-      <h2 class="font-serif text-3xl lg:text-4xl text-brown text-center mb-8">{whatIs.title}</h2>
-      <p class="font-serif text-xl text-terracotta text-center leading-relaxed mb-10">
-        {whatIs.highlight}
-      </p>
-      {
-        whatIs.paragraphs.map((p) => (
-          <p class="text-brown/75 leading-relaxed mb-6">{p}</p>
-        ))
-      }
-    </div>
-  </section>
-
-  <!-- Founder -->
-  <section class="py-20 lg:py-28 bg-white">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6">
-      <div class="grid lg:grid-cols-5 gap-12 lg:gap-16 items-start">
-        <div class="lg:col-span-2">
-          <div class="aspect-[3/4] rounded-[3rem] overflow-hidden bg-gradient-to-br from-sage/25 to-mustard/15 flex items-center justify-center">
-            <p class="text-brown/40 text-sm">Foto de Alizé — placeholder</p>
-          </div>
-        </div>
-        <div class="lg:col-span-3">
-          <h2 class="font-serif text-3xl lg:text-4xl text-brown mb-6">{founder.title}</h2>
-          <p class="font-serif text-2xl text-brown mb-1">{founder.name}</p>
-          <p class="text-terracotta italic mb-1">{founder.role}</p>
-          <p class="text-sage text-sm tracking-wide mb-8">{founder.credentials}</p>
-          {
-            founder.paragraphs.map((p, i) => (
-              <p
-                class:list={[
-                  "leading-relaxed mb-4",
-                  i === founder.paragraphs.length - 1
-                    ? "font-medium text-brown text-lg mt-6"
-                    : "text-brown/75",
-                ]}
-              >
-                {p}
-              </p>
-            ))
-          }
-          <a
-            href="/contacto"
-            class="inline-flex mt-8 items-center px-6 py-3 rounded-full bg-sage text-cream text-sm tracking-wide hover:bg-sage/90 transition-colors"
-          >
-            Reserva una sesión
-          </a>
-        </div>
       </div>
     </div>
   </section>

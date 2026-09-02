@@ -1,0 +1,108 @@
+---
+interface VideoSlide {
+  src: string;
+  poster?: string;
+}
+
+interface Props {
+  eyebrow: string;
+  videos: ReadonlyArray<VideoSlide>;
+}
+
+const { eyebrow, videos } = Astro.props;
+const carouselId = "video-hero-carousel";
+---
+
+<section
+  class="relative w-full h-[55vh] lg:h-[65vh] overflow-hidden bg-brown"
+  aria-label={eyebrow}
+>
+  <div id={`${carouselId}-track`} class="absolute inset-0 overflow-hidden">
+    <div
+      id={`${carouselId}-slides`}
+      class="flex h-full transition-transform duration-700 ease-out"
+    >
+      {
+        videos.map((video, index) => (
+          <div class="relative h-full w-full shrink-0">
+            <video
+              class="video-hero-slide absolute inset-0 h-full w-full object-cover"
+              data-index={index}
+              src={video.src}
+              poster={video.poster}
+              muted
+              loop
+              playsinline
+              autoplay={index === 0}
+              preload={index === 0 ? "auto" : "metadata"}
+            />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="absolute inset-0 bg-brown/40 pointer-events-none" aria-hidden="true"></div>
+
+  <div class="absolute inset-0 flex items-center justify-center pointer-events-none px-16 sm:px-24">
+    <p class="font-sans text-3xl sm:text-4xl lg:text-5xl font-medium tracking-[0.35em] text-cream text-center uppercase">
+      {eyebrow}
+    </p>
+  </div>
+
+  {
+    videos.length > 1 && (
+      <>
+        <button
+          type="button"
+          id={`${carouselId}-prev`}
+          class="absolute left-3 sm:left-6 top-1/2 z-10 -translate-y-1/2 rounded-full border border-cream/40 bg-brown/30 p-3 text-cream backdrop-blur-sm transition-colors hover:bg-brown/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream"
+          aria-label="Video anterior"
+        >
+          <svg class="h-5 w-5 sm:h-6 sm:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+
+        <button
+          type="button"
+          id={`${carouselId}-next`}
+          class="absolute right-3 sm:right-6 top-1/2 z-10 -translate-y-1/2 rounded-full border border-cream/40 bg-brown/30 p-3 text-cream backdrop-blur-sm transition-colors hover:bg-brown/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream"
+          aria-label="Siguiente video"
+        >
+          <svg class="h-5 w-5 sm:h-6 sm:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </>
+    )
+  }
+</section>
+
+<script define:vars={{ carouselId, total: videos.length }}>
+  const slides = document.getElementById(`${carouselId}-slides`);
+  const slideVideos = slides?.querySelectorAll(".video-hero-slide");
+  let current = 0;
+
+  function playVideo(index) {
+    slideVideos?.forEach((video, i) => {
+      if (i === index) {
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+        video.currentTime = 0;
+      }
+    });
+  }
+
+  function goTo(index) {
+    current = (index + total) % total;
+    slides.style.transform = `translateX(-${current * 100}%)`;
+    playVideo(current);
+  }
+
+  document.getElementById(`${carouselId}-prev`)?.addEventListener("click", () => goTo(current - 1));
+  document.getElementById(`${carouselId}-next`)?.addEventListener("click", () => goTo(current + 1));
+
+  playVideo(0);
+</script>

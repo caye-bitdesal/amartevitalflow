@@ -1,8 +1,96 @@
 ---
-import ServiceLayout from "../layouts/ServiceLayout.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 import { servicePages } from "../data/site";
 
 const page = servicePages.naturopatia;
 ---
 
-<ServiceLayout {...page} />
+<BaseLayout title={page.title} description={page.intro.join(" ")}>
+  <section class="py-16 lg:py-24">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <p class="text-xs font-medium tracking-[0.2em] text-terracotta mb-4">{page.eyebrow}</p>
+      <h1 class="font-serif text-4xl lg:text-5xl text-brown mb-8">{page.title}</h1>
+
+      <div class="max-w-3xl space-y-6 mb-16 lg:mb-20">
+        {
+          page.intro.map((paragraph) => (
+            <p class="text-lg text-brown/80 leading-relaxed">{paragraph}</p>
+          ))
+        }
+      </div>
+
+      <div class="space-y-20 lg:space-y-28">
+        {
+          page.offerings.map((offering, index) => (
+            <article
+              class:list={[
+                "grid lg:grid-cols-2 gap-10 lg:gap-16 items-center",
+                index % 2 === 1 && "lg:[&>*:first-child]:order-2",
+              ]}
+            >
+              <div class="aspect-[4/3] rounded-[2rem] overflow-hidden bg-gradient-to-br from-sage/25 to-mustard/15">
+                {
+                  offering.image ? (
+                    <img
+                      src={offering.image}
+                      alt={offering.imageAlt}
+                      class="h-full w-full object-cover"
+                      loading={index === 0 ? "eager" : "lazy"}
+                    />
+                  ) : (
+                    <div class="flex h-full w-full items-center justify-center p-8 text-center">
+                      <p class="text-sm text-brown/40">Imagen próximamente</p>
+                    </div>
+                  )
+                }
+              </div>
+
+              <div>
+                <h2 class="font-serif text-3xl lg:text-4xl text-brown mb-6">{offering.title}</h2>
+                <div class="space-y-4">
+                  {
+                    offering.paragraphs.map((paragraph) => (
+                      <p class="text-brown/75 leading-relaxed">{paragraph}</p>
+                    ))
+                  }
+                </div>
+
+                {
+                  "faq" in offering && offering.faq && (
+                    <details class="mt-8 group">
+                      <summary class="cursor-pointer list-none font-semibold text-brown hover:text-terracotta transition-colors [&::-webkit-details-marker]:hidden">
+                        <span class="inline-flex items-center gap-2">
+                          {offering.faq.question}
+                          <svg
+                            class="h-4 w-4 shrink-0 transition-transform group-open:rotate-180"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                          >
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                          </svg>
+                        </span>
+                      </summary>
+                      <p class="mt-4 text-brown/75 leading-relaxed pl-0">{offering.faq.answer}</p>
+                    </details>
+                  )
+                }
+              </div>
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="mt-16 lg:mt-24 p-8 rounded-3xl bg-cream-dark/50 text-center">
+        <p class="font-serif text-xl text-brown mb-4">¿Te gustaría saber más?</p>
+        <a
+          href="/contacto"
+          class="inline-flex items-center px-6 py-3 rounded-full bg-terracotta text-cream text-sm tracking-wide hover:bg-terracotta/90 transition-colors"
+        >
+          Reserva una sesión
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

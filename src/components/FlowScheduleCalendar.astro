@@ -1,0 +1,76 @@
+---
+import { flowSchedule } from "../data/site";
+
+const dayOrder = ["monday", "tuesday", "wednesday", "thursday"] as const;
+
+const dayLabels: Record<(typeof dayOrder)[number], string> = {
+  monday: "Lunes",
+  tuesday: "Martes",
+  wednesday: "Miércoles",
+  thursday: "Jueves",
+};
+
+const classesByDay = dayOrder.map((day) => ({
+  day,
+  label: dayLabels[day],
+  classes: flowSchedule.classes
+    .filter((cls) => cls.day === day)
+    .sort((a, b) => a.start.localeCompare(b.start)),
+}));
+---
+
+<div class="mt-8">
+  <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    {
+      classesByDay.map(({ day, label, classes }) => (
+        <div class="rounded-2xl bg-cream-dark/40 p-4">
+          <h3 class="font-serif text-lg text-brown mb-3 pb-2 border-b border-brown/10">{label}</h3>
+          {classes.length > 0 ? (
+            <ul class="space-y-2">
+              {classes.map((cls) => {
+                const location = flowSchedule.locations[cls.location];
+                return (
+                  <li
+                    class:list={[
+                      "rounded-xl px-3 py-2.5 text-sm",
+                      cls.location === "garden"
+                        ? "bg-sage/20 border border-sage/30"
+                        : "bg-terracotta/15 border border-terracotta/25",
+                    ]}
+                  >
+                    <p class="font-medium text-brown">{cls.label}</p>
+                    <p class="text-brown/70 text-xs mt-0.5">{location.label}</p>
+                    <p class="text-brown/55 text-xs mt-1 tabular-nums">
+                      {cls.start} – {cls.end}
+                    </p>
+                  </li>
+                );
+              })}
+            </ul>
+          ) : (
+            <p class="text-sm text-brown/40 italic">Sin clases</p>
+          )}
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="mt-6 flex flex-wrap gap-4 text-sm text-brown/70">
+    {
+      Object.values(flowSchedule.locations).map((location) => (
+        <div class="flex items-center gap-2">
+          <span
+            class:list={[
+              "inline-block h-3 w-3 rounded-full",
+              location.id === "garden" ? "bg-sage" : "bg-terracotta",
+            ]}
+            aria-hidden="true"
+          />
+          <span>
+            {location.city} · {location.label}
+          </span>
+        </div>
+      ))
+    }
+  </div>
+</div>

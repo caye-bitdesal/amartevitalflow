@@ -8,10 +8,10 @@ export const site = {
 } as const;
 
 export const contact = {
-  email: "hola@amartevitalflow.com",
-  phone: "+34 600 000 000",
-  whatsapp: "34600000000",
-  location: "Barcelona, España",
+  email: "info.amartevitalflow@gmail.com",
+  phone: "+34 623 100 112",
+  whatsapp: "34623100112",
+  location: "Elche, Alicante",
 } as const;
 
 export const nav = [
@@ -95,7 +95,7 @@ export const founder = {
   title: "Detrás de Am'Arte Vital Flow",
   name: "Alizé Le Gal",
   role: "Fundadora de Am'Arte Vital Flow.",
-  credentials: "Naturópata · Facilitadora de Flow Movement",
+  credentials: "Naturópata · Monitora de Movimiento Flow",
   paragraphs: [
     "Am'Arte Vital Flow nace de mi interés por comprender el cuerpo desde una mirada integradora.",
     "Siempre me ha fascinado la capacidad del organismo para adaptarse, aprender y recuperar el equilibrio cuando encuentra las condiciones adecuadas. Esa curiosidad es la que sigue guiando mi forma de estudiar, trabajar y acompañar a cada persona.",
@@ -111,19 +111,19 @@ export const founder = {
 export const testimonials = [
   {
     quote:
-      "El acompañamiento me ayudó a entender mi cuerpo de una forma que nunca había experimentado. Me siento más consciente y en paz.",
+      "Llevaba años con problemas digestivos, sin poder comer nada que no me sentará bien. Gracias al acompañamiento que me proporcionó Ali, puedo de nuevo comer sin miedo.",
     author: "María G.",
     context: "Consulta de naturopatía",
   },
   {
     quote:
-      "Las sesiones de movimiento me devolvieron confianza. Poco a poco he recuperado la sensación de que mi cuerpo puede adaptarse y sostenerme.",
+      "Las sesiones de Flow me ayudarón a recuperar mi confianza. Poco a poco he aprendido a confiar de nuevo en mi cuerpo y redescubrí que puedo sostenerme.",
     author: "Laura P.",
     context: "Movimiento Flow",
   },
   {
     quote:
-      "Los talleres son un espacio precioso para aprender, crear y conectar. Sales con herramientas que realmente puedes integrar en tu día a día.",
+      "Me encantó el taller de aromaterapia que nos impartió Alize! Fue muy interesante y divertido.",
     author: "Carmen R.",
     context: "Taller de aromaterapia",
   },
@@ -131,24 +131,57 @@ export const testimonials = [
 
 export const servicePages = {
   naturopatia: {
-    title: "Consulta de Naturopatía",
+    title: "Comprender",
     eyebrow: "COMPRENDER",
-    intro:
-      "Un acompañamiento individualizado que integra la educación en hábitos saludables y, cuando es adecuado, diferentes herramientas propias de la naturopatía.",
-    sections: [
+    intro: [
+      "Todo proceso de bienestar comienza por comprender. Antes de buscar soluciones, es importante entender qué expresa el cuerpo, qué emociones necesitan ser escuchadas y qué factores pueden estar influyendo en el equilibrio de cada persona.",
+      "Cada historia es única y merece un acompañamiento adaptado a sus necesidades. Por ello, este espacio reúne diferentes formas de acompañamiento que atienden el bienestar físico, emocional y mental desde una mirada integrativa.",
+      "Ya sea a través de la naturopatía, la terapia floral o el masaje, el objetivo es favorecer un equilibrio profundo de forma respetuosa, personalizada y consciente.",
+    ],
+    offerings: [
       {
-        title: "Una visión global de la persona",
-        body: "La naturopatía entiende la salud como el resultado del equilibrio entre múltiples factores: alimentación, descanso, movimiento, gestión emocional y entorno. Cada consulta parte de escuchar tu historia, tus síntomas y tus objetivos para diseñar un plan adaptado a ti.",
+        title: "Consulta floral",
+        paragraphs: [
+          "La consulta floral es un espacio de escucha y acompañamiento en el que exploramos juntos tu momento vital, identificando los bloqueos emocionales, patrones o situaciones que pueden estar influyendo en tu bienestar. A partir de esta conversación elaboro un remedio floral personalizado con las Flores de Bach más adecuadas para ti.",
+          "La sesión tiene una duración aproximada de 30 minutos, se realiza exclusivamente online e incluye la preparación de tu remedio floral personalizado. Podrás recogerlo en uno de los puntos acordados o recibirlo por Correos. En caso de envío, se añadirá únicamente el coste correspondiente al servicio postal.",
+        ],
+        image: "/consulta-floral.png",
+        imageAlt: "Frascos de Flores de Bach sobre una mesa de madera en un espacio de consulta",
+        faq: {
+          question: "¿Qué son las Flores de Bach?",
+          answer:
+            "Las Flores de Bach son una terapia floral que acompaña el mundo emocional con delicadeza y respeto. Cada esencia actúa como un suave recordatorio de los recursos que ya existen en nuestro interior, ayudándonos a recuperar el equilibrio, la serenidad y la confianza para transitar los cambios de la vida desde un lugar más consciente.",
+        },
       },
       {
-        title: "Herramientas que puedo integrar",
-        body: "Según tus necesidades, el acompañamiento puede incluir educación en hábitos saludables, fitoterapia, aromaterapia o el uso responsable de complementos naturales. Siempre desde una perspectiva integrativa y respetuosa con tu ritmo.",
+        title: "Consulta de naturopatía",
+        paragraphs: [
+          "La consulta de naturopatía es un espacio de escucha, comprensión y acompañamiento personalizado. A través de una visión global de la persona, buscamos comprender el origen de los desequilibrios y construir un abordaje adaptado a sus necesidades, teniendo en cuenta el cuerpo, las emociones y el estilo de vida.",
+          "La primera sesión tiene una duración aproximada de 1h a 1h30 y puede realizarse de forma presencial o online, para ofrecer un acompañamiento accesible y adaptado a las necesidades de cada persona. Durante este encuentro profundizamos en el motivo de consulta, el historial de salud, los hábitos de vida y otros aspectos relevantes para construir una visión completa de la persona. A partir de esta valoración inicial se establece un plan de acompañamiento personalizado con pautas y objetivos adaptados a sus necesidades.",
+          "Las sesiones de seguimiento se realizan de forma online y se programan según la evolución y las necesidades de cada persona. Son un espacio para valorar los cambio observados, resolver dudas, revisar los objetivos y adaptar las recomendaciones, permitiendo que el acompañamiento evolucione al mismo ritmo que el proceso de cada persona.",
+        ],
+        image: "/imagen-consulta-chat.png",
+        imageAlt: "Espacio de consulta",
+      },
+      {
+        title: "Masajes",
+        paragraphs: [
+          "Cada cuerpo cuenta una historia diferente. Por eso, el masaje no sigue un protocolo fijo, sino que evoluciona a medida que la sesión avanza, respetando als necesidades que el propio cuerpo expresa en cada momento. A través de la combinación de distintas técnicas manuales y el uso consciente de aceites esenciales, cada masaje se convierte en una experiencia úncia orientada a favorecer la relajación, liberar tensiones y recuperar el equilibrio.",
+          "Los aceites esenciales forman parte del tratamiento por sus propiedades y su capacidad para enriquecer la experiencia sensorial. No obstante, si lo prefieres o existe alguna contraindicación, la sesión puede realizarse sin ellos.",
+        ],
+        image: "/picture-masage-chat.png",
+        imageAlt: "Una persona está boca abajo sobre una camilla recibiendo un masaje.",
       },
     ],
   },
   movimientoFlow: {
     title: "Movimiento Flow",
     eyebrow: "EXPERIMENTAR",
+    headerVideos: [
+      { src: "/videos/movimiento-flow-1.mp4", poster: "/contacto-alize.png" },
+      { src: "/videos/movimiento-flow-2.mp4", poster: "/contacto-alize.png" },
+      { src: "/videos/movimiento-flow-3.mp4", poster: "/contacto-alize.png" },
+    ],
     intro:
       "Sesiones de movimiento consciente que desarrollan movilidad, fuerza, coordinación, respiración y conciencia corporal.",
     sections: [
@@ -158,7 +191,12 @@ export const servicePages = {
       },
       {
         title: "Qué trabajamos",
-        body: "Movilidad, fuerza funcional, coordinación, respiración consciente y mayor conciencia corporal. El objetivo no es rendir, sino reconectar con las capacidades naturales de tu organismo.",
+        body: "Movilidad, fuerza, coordinación, respiración consciente y mayor conciencia corporal. El objetivo no es rendir, sino reconectar con las capacidades naturales de tu organismo.",
+      },
+      {
+        title: "Clases",
+        body: "Imparto clases online y presenciales en Elche y Dolores.",
+        showSchedule: true,
       },
     ],
   },
@@ -169,15 +207,43 @@ export const servicePages = {
       "Encuentros para aprender, crear y experimentar alrededor del bienestar.",
     sections: [
       {
-        title: "Propuestas variadas",
-        body: "Talleres sobre alimentación saludable, aromaterapia, plantas medicinales, movimiento consciente y propuestas de expresión creativa inspiradas en la arteterapia.",
+        title: "Talleres de aromaterapia",
+        body: "Estos talleres están enfocados a la información, para que puedas usar los aceites esenciales de forma segura y en tu día-día. Se dividen en varios módulos creativos.",
       },
       {
-        title: "Herramientas para el día a día",
-        body: "Cada taller está pensado para que descubras recursos prácticos que puedas integrar en tu rutina, en un ambiente cercano y participativo.",
+        title: "Talleres de arteterapia",
+        body: "Cada taller está pensado para que descubras recursos prácticos para que puedas explorar tu creatividad, soltar tensiones y aprender a confiar en ti.",
       },
     ],
   },
+} as const;
+
+export const flowSchedule = {
+  locations: {
+    garden: {
+      id: "garden" as const,
+      city: "Dolores",
+      label: "Garden",
+    },
+    aulaMind: {
+      id: "aulaMind" as const,
+      city: "Elche",
+      label: "aula mind",
+    },
+  },
+  classes: [
+    { day: "monday" as const, start: "07:30", end: "08:30", location: "aulaMind" as const, label: "Flow" },
+    { day: "monday" as const, start: "15:30", end: "16:30", location: "garden" as const, label: "Flow" },
+    { day: "monday" as const, start: "16:30", end: "17:30", location: "garden" as const, label: "Flow" },
+    { day: "monday" as const, start: "20:00", end: "21:00", location: "garden" as const, label: "Flow" },
+    { day: "tuesday" as const, start: "16:00", end: "17:00", location: "garden" as const, label: "Flow" },
+    { day: "tuesday" as const, start: "17:00", end: "18:00", location: "garden" as const, label: "Flow" },
+    { day: "wednesday" as const, start: "10:00", end: "11:00", location: "garden" as const, label: "Flow" },
+    { day: "wednesday" as const, start: "11:00", end: "12:00", location: "garden" as const, label: "Flow" },
+    { day: "wednesday" as const, start: "13:45", end: "14:45", location: "garden" as const, label: "Flow" },
+    { day: "wednesday" as const, start: "14:45", end: "15:45", location: "garden" as const, label: "Flow" },
+    { day: "thursday" as const, start: "17:30", end: "18:30", location: "aulaMind" as const, label: "Flow" },
+  ],
 } as const;
 
 export const legal = [
