@@ -85,7 +85,18 @@ import { contact, founder } from "../data/site";
           </a>
         </div>
 
-        <form class="bg-white rounded-3xl p-8 shadow-sm border border-cream-dark/50 space-y-6" action="#" method="POST">
+        <form
+          id="contact-form"
+          class="bg-white rounded-3xl p-8 shadow-sm border border-cream-dark/50 space-y-6"
+          novalidate
+        >
+          <div id="form-status" class="hidden rounded-xl px-4 py-3 text-sm" role="status" aria-live="polite"></div>
+
+          <div class="hidden" aria-hidden="true">
+            <label for="_honey">No rellenar</label>
+            <input type="text" id="_honey" name="_honey" tabindex="-1" autocomplete="off" />
+          </div>
+
           <div>
             <label for="name" class="block text-sm text-brown/70 mb-2">Nombre</label>
             <input
@@ -93,6 +104,7 @@ import { contact, founder } from "../data/site";
               id="name"
               name="name"
               required
+              autocomplete="name"
               class="w-full px-4 py-3 rounded-xl border border-cream-dark bg-cream/50 text-brown focus:outline-none focus:ring-2 focus:ring-sage/40"
             />
           </div>
@@ -103,6 +115,7 @@ import { contact, founder } from "../data/site";
               id="email"
               name="email"
               required
+              autocomplete="email"
               class="w-full px-4 py-3 rounded-xl border border-cream-dark bg-cream/50 text-brown focus:outline-none focus:ring-2 focus:ring-sage/40"
             />
           </div>
@@ -131,21 +144,26 @@ import { contact, founder } from "../data/site";
             ></textarea>
           </div>
           <button
+            id="contact-submit"
             type="submit"
-            class="w-full py-3.5 rounded-full bg-terracotta text-cream font-medium tracking-wide hover:bg-terracotta/90 transition-colors"
+            class="w-full py-3.5 rounded-full bg-terracotta text-cream font-medium tracking-wide hover:bg-terracotta/90 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
           >
             Enviar mensaje
           </button>
-          <p class="text-xs text-brown/50 text-center">
-            El formulario es provisional. Conectaremos el envío en una fase posterior.
-          </p>
         </form>
       </div>
     </div>
   </section>
 </BaseLayout>
 
-<script define:vars={{ whatsappNumber: contact.whatsapp }}>
+<script define:vars={{ whatsappNumber: contact.whatsapp, formEmail: contact.email }}>
+  const serviceLabels = {
+    naturopatia: "Consulta de Naturopatía",
+    movimiento: "Movimiento Flow",
+    talleres: "Talleres y eventos",
+    otro: "Otro",
+  };
+
   const params = new URLSearchParams(window.location.search);
   const servicio = params.get("servicio");
   const mensaje = params.get("mensaje");
@@ -170,4 +188,75 @@ import { contact, founder } from "../data/site";
 
     whatsappLink?.scrollIntoView({ behavior: "smooth", block: "center" });
   }
+
+  const form = document.getElementById("contact-form");
+  const submitBtn = document.getElementById("contact-submit");
+  const statusEl = document.getElementById("form-status");
+
+  function showStatus(message, type) {
+    if (!statusEl) return;
+    statusEl.textContent = message;
+    statusEl.classList.remove("hidden", "bg-sage/15", "text-brown", "border", "border-sage/30", "bg-terracotta/10", "border-terracotta/30", "text-brown");
+    if (type === "success") {
+      statusEl.classList.add("bg-sage/15", "text-brown", "border", "border-sage/30");
+    } else {
+      statusEl.classList.add("bg-terracotta/10", "text-brown", "border", "border-terracotta/30");
+    }
+  }
+
+  form?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!(form instanceof HTMLFormElement) || !(submitBtn instanceof HTMLButtonElement)) return;
+
+    const honey = form.querySelector("#_honey");
+    if (honey instanceof HTMLInputElement && honey.value) return;
+
+    const formData = new FormData(form);
+    const name = String(formData.get("name") ?? "").trim();
+    const email = String(formData.get("email") ?? "").trim();
+    const service = String(formData.get("service") ?? "");
+    const message = String(formData.get("message") ?? "").trim();
+
+    if (!name || !email || !message) {
+      showStatus("Por favor, completa todos los campos obligatorios.", "error");
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Enviando…";
+    statusEl?.classList.add("hidden");
+
+    try {
+      const response = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(formEmail)}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          servicio: serviceLabels[service] ?? (service || "No especificado"),
+          message,
+          _subject: "Nuevo mensaje de contacto — Am'Arte Vital Flow",
+          _captcha: "false",
+          _template: "table",
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        form.reset();
+        showStatus("¡Mensaje enviado! Te responderé lo antes posible.", "success");
+      } else {
+        showStatus("No se pudo enviar el mensaje. Escríbeme por WhatsApp o email.", "error");
+      }
+    } catch {
+      showStatus("Error de conexión. Escríbeme por WhatsApp o email.", "error");
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Enviar mensaje";
+    }
+  });
 </script>
