@@ -176,6 +176,7 @@ export const servicePages = {
   },
   movimientoFlow: {
     title: "Movimiento Flow",
+    subtitle: "Inspirado en posturas de yoga, pilates, capoeira y movimiento animal.",
     eyebrow: "EXPERIMENTAR",
     headerVideos: [
       { src: "/videos/movimiento-flow-1.mp4", poster: "/contacto-alize.png" },
@@ -190,15 +191,51 @@ export const servicePages = {
         body: "A través del movimiento exploramos el cuerpo como una fuente de adaptación, confianza y bienestar. Cada sesión respeta tus capacidades y ritmo, creando un espacio seguro para experimentar y aprender.",
       },
       {
-        title: "Qué trabajamos",
+        title: "¿Qué trabajamos?",
         body: "Movilidad, fuerza, coordinación, respiración consciente y mayor conciencia corporal. El objetivo no es rendir, sino reconectar con las capacidades naturales de tu organismo.",
       },
       {
         title: "Clases",
-        body: "Imparto clases online y presenciales en Elche y Dolores.",
+        paragraphs: [
+          "Imparto clases online y presenciales en Elche y Dolores.",
+          "Puedes pedir cualquiera de estos horarios online si no puedes asistir de forma presencial.",
+          "Las clases tienen un aforo limitado para que te pueda acompañar en cualquier momento y según tus necesidades.",
+        ],
         showSchedule: true,
       },
     ],
+    pricing: {
+      title: "Precios",
+      intro: "La primera clase de prueba gratis y sin compromiso.",
+      blocks: [
+        {
+          title: "Clases sueltas",
+          tone: "sage" as const,
+          options: [
+            { amount: "10€", detail: "en Aula Mind y para los usuarios de Garden Training Center" },
+            { amount: "12€", detail: "en Garden Training Center para los no usuarios" },
+          ],
+        },
+        {
+          title: "Mensualidad",
+          tone: "cream" as const,
+          condition: "Paga antes del 3 de cada mes o eres usuario de Garden Training Center",
+          options: [
+            { amount: "25€", detail: "por una clase semanal" },
+            { amount: "45€", detail: "por dos clases semanales" },
+          ],
+        },
+        {
+          title: "Mensualidad",
+          tone: "terracotta" as const,
+          condition: "Paga después del 3 de cada mes",
+          options: [
+            { amount: "35€", detail: "por una clase semanal" },
+            { amount: "60€", detail: "por dos clases semanales" },
+          ],
+        },
+      ],
+    },
   },
   talleres: {
     title: "Talleres y eventos",

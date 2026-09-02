@@ -13,6 +13,9 @@ const page = servicePages.movimientoFlow;
   <section class="py-16 lg:py-24">
     <div class="mx-auto max-w-3xl px-4 sm:px-6">
       <h1 class="font-serif text-4xl lg:text-5xl text-brown mb-6">{page.title}</h1>
+      {"subtitle" in page && page.subtitle && (
+        <p class="font-serif text-2xl lg:text-3xl text-brown italic leading-relaxed mb-6">{page.subtitle}</p>
+      )}
       <p class="text-lg text-brown/80 leading-relaxed mb-12">{page.intro}</p>
 
       <div class="space-y-10">
@@ -20,12 +23,56 @@ const page = servicePages.movimientoFlow;
           page.sections.map((section) => (
             <article>
               <h2 class="font-serif text-2xl text-brown mb-4">{section.title}</h2>
-              <p class="text-brown/75 leading-relaxed">{section.body}</p>
+              {"paragraphs" in section && section.paragraphs ? (
+                <div class="space-y-4">
+                  {section.paragraphs.map((paragraph) => (
+                    <p class="text-brown/75 leading-relaxed">{paragraph}</p>
+                  ))}
+                </div>
+              ) : (
+                "body" in section && <p class="text-brown/75 leading-relaxed">{section.body}</p>
+              )}
               {"showSchedule" in section && section.showSchedule && <FlowScheduleCalendar />}
             </article>
           ))
         }
       </div>
+
+      {"pricing" in page && page.pricing && (
+        <article class="mt-10">
+          <h2 class="font-serif text-2xl text-brown mb-4">{page.pricing.title}</h2>
+          <p class="text-brown/75 leading-relaxed mb-6">{page.pricing.intro}</p>
+          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {
+              page.pricing.blocks.map((block) => (
+                <div
+                  class:list={[
+                    "rounded-2xl p-5 h-full flex flex-col",
+                    block.tone === "sage" && "bg-sage/20 border border-sage/30",
+                    block.tone === "cream" && "bg-cream-dark/70 border border-brown/10",
+                    block.tone === "terracotta" && "bg-terracotta/15 border border-terracotta/25",
+                  ]}
+                >
+                  <h3 class="font-serif text-xl text-brown mb-3">{block.title}</h3>
+                  {"condition" in block && block.condition && (
+                    <p class="text-sm text-terracotta font-medium leading-snug mb-4">{block.condition}</p>
+                  )}
+                  {"options" in block && block.options && (
+                    <ul class="space-y-3 mt-auto">
+                      {block.options.map((option) => (
+                        <li>
+                          <p class="font-serif text-3xl text-brown leading-none">{option.amount}</p>
+                          <p class="text-sm text-brown/75 mt-1">{option.detail}</p>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              ))
+            }
+          </div>
+        </article>
+      )}
 
       <div class="mt-14 p-8 rounded-3xl bg-cream-dark/50 text-center">
         <p class="font-serif text-xl text-brown mb-4">¿Te gustaría saber más?</p>
