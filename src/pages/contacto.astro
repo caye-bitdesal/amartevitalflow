@@ -72,6 +72,7 @@ import { contact, founder } from "../data/site";
           </ul>
 
           <a
+            id="whatsapp-link"
             href={`https://wa.me/${contact.whatsapp}`}
             target="_blank"
             rel="noopener noreferrer"
@@ -143,3 +144,30 @@ import { contact, founder } from "../data/site";
     </div>
   </section>
 </BaseLayout>
+
+<script define:vars={{ whatsappNumber: contact.whatsapp }}>
+  const params = new URLSearchParams(window.location.search);
+  const servicio = params.get("servicio");
+  const mensaje = params.get("mensaje");
+
+  if (servicio) {
+    const serviceSelect = document.getElementById("service");
+    if (serviceSelect instanceof HTMLSelectElement) {
+      serviceSelect.value = servicio;
+    }
+  }
+
+  if (mensaje) {
+    const messageField = document.getElementById("message");
+    if (messageField instanceof HTMLTextAreaElement) {
+      messageField.value = mensaje;
+    }
+
+    const whatsappLink = document.getElementById("whatsapp-link");
+    if (whatsappLink instanceof HTMLAnchorElement) {
+      whatsappLink.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(mensaje)}`;
+    }
+
+    whatsappLink?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+</script>

@@ -17,9 +17,22 @@ const classesByDay = dayOrder.map((day) => ({
     .filter((cls) => cls.day === day)
     .sort((a, b) => a.start.localeCompare(b.start)),
 }));
+
+function formatTime(time: string) {
+  return time.replace(":", "h");
+}
+
+function buildReserveMessage(
+  day: (typeof dayOrder)[number],
+  start: string,
+  end: string,
+  locationLabel: string,
+) {
+  return `Me gustaría más información a cerca de las clases de ${formatTime(start)} – ${formatTime(end)}, ${dayLabels[day]} en ${locationLabel}.`;
+}
 ---
 
-<div class="mt-8">
+<div class="mt-8" data-flow-schedule>
   <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
     {
       classesByDay.map(({ day, label, classes }) => (
@@ -29,20 +42,32 @@ const classesByDay = dayOrder.map((day) => ({
             <ul class="space-y-2">
               {classes.map((cls) => {
                 const location = flowSchedule.locations[cls.location];
+                const reserveMessage = buildReserveMessage(day, cls.start, cls.end, location.label);
                 return (
-                  <li
-                    class:list={[
-                      "rounded-xl px-3 py-2.5 text-sm",
-                      cls.location === "garden"
-                        ? "bg-sage/20 border border-sage/30"
-                        : "bg-terracotta/15 border border-terracotta/25",
-                    ]}
-                  >
-                    <p class="font-medium text-brown">{cls.label}</p>
-                    <p class="text-brown/70 text-xs mt-0.5">{location.label}</p>
-                    <p class="text-brown/55 text-xs mt-1 tabular-nums">
-                      {cls.start} – {cls.end}
-                    </p>
+                  <li>
+                    <button
+                      type="button"
+                      class:list={[
+                        "w-full text-left rounded-xl px-3 py-2.5 text-sm transition-shadow hover:shadow-md cursor-pointer",
+                        cls.location === "garden"
+                          ? "bg-sage/20 border border-sage/30 hover:bg-sage/30"
+                          : "bg-terracotta/15 border border-terracotta/25 hover:bg-terracotta/25",
+                      ]}
+                      data-flow-class
+                      data-day={dayLabels[day]}
+                      data-time={`${formatTime(cls.start)} – ${formatTime(cls.end)}`}
+                      data-location={location.label}
+                      data-city={location.city}
+                      data-address={location.address}
+                      data-reserve-message={reserveMessage}
+                      aria-label={`Reservar clase ${cls.label}, ${dayLabels[day]} ${cls.start} en ${location.label}`}
+                    >
+                      <p class="font-medium text-brown">{cls.label}</p>
+                      <p class="text-brown/70 text-xs mt-0.5">{location.label}</p>
+                      <p class="text-brown/55 text-xs mt-1 tabular-nums">
+                        {cls.start} – {cls.end}
+                      </p>
+                    </button>
                   </li>
                 );
               })}
@@ -73,4 +98,224 @@ const classesByDay = dayOrder.map((day) => ({
       ))
     }
   </div>
+
+  <div class="flow-schedule__modal" data-flow-modal hidden>
+    <div class="flow-schedule__modal-backdrop" data-flow-modal-close tabindex="-1" aria-hidden="true"></div>
+    <div
+      class="flow-schedule__modal-panel"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="flow-modal-title"
+      tabindex="-1"
+    >
+      <button type="button" class="flow-schedule__modal-close" data-flow-modal-close aria-label="Cerrar">
+        ×
+      </button>
+      <h4 id="flow-modal-title" class="flow-schedule__modal-title" data-flow-modal-title></h4>
+      <p class="flow-schedule__modal-city" data-flow-modal-city></p>
+      <div class="flow-schedule__modal-meta">
+        <span class="flow-schedule__modal-badge" data-flow-modal-day></span>
+        <span class="flow-schedule__modal-badge" data-flow-modal-time></span>
+      </div>
+      <div class="flow-schedule__modal-address">
+        <p class="flow-schedule__modal-label">Dirección</p>
+        <p class="flow-schedule__modal-address-text" data-flow-modal-address></p>
+      </div>
+      <a href="/contacto" class="flow-schedule__modal-btn" data-flow-modal-reserve> Reservar </a>
+    </div>
+  </div>
 </div>
+
+<script>
+  const schedule = document.querySelector("[data-flow-schedule]");
+  if (schedule) {
+    const modal = schedule.querySelector("[data-flow-modal]");
+    const modalTitle = schedule.querySelector("[data-flow-modal-title]");
+    const modalDay = schedule.querySelector("[data-flow-modal-day]");
+    const modalTime = schedule.querySelector("[data-flow-modal-time]");
+    const modalAddress = schedule.querySelector("[data-flow-modal-address]");
+    const modalCity = schedule.querySelector("[data-flow-modal-city]");
+    const reserveBtn = schedule.querySelector("[data-flow-modal-reserve]");
+    const dialog = schedule.querySelector(".flow-schedule__modal-panel");
+    let lastFocused: HTMLElement | null = null;
+
+    function openModal(button: HTMLButtonElement) {
+      if (!modal || !modalTitle || !modalDay || !modalTime || !modalAddress || !reserveBtn || !modalCity) return;
+
+      lastFocused = button;
+      modalTitle.textContent = button.dataset.location ?? "";
+      modalCity.textContent = button.dataset.city ?? "";
+      modalDay.textContent = button.dataset.day ?? "";
+      modalTime.textContent = button.dataset.time ?? "";
+      modalAddress.textContent = button.dataset.address ?? "";
+
+      const message = button.dataset.reserveMessage ?? "";
+      const params = new URLSearchParams({ servicio: "movimiento", mensaje: message });
+      reserveBtn.setAttribute("href", `/contacto?${params.toString()}`);
+
+      modal.hidden = false;
+      document.body.style.overflow = "hidden";
+      dialog?.focus();
+    }
+
+    function closeModal() {
+      if (!modal) return;
+      modal.hidden = true;
+      document.body.style.overflow = "";
+      lastFocused?.focus();
+    }
+
+    schedule.querySelectorAll("[data-flow-class]").forEach((button) => {
+      button.addEventListener("click", () => openModal(button as HTMLButtonElement));
+    });
+
+    schedule.querySelectorAll("[data-flow-modal-close]").forEach((el) => {
+      el.addEventListener("click", closeModal);
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && modal && !modal.hidden) {
+        closeModal();
+      }
+    });
+  }
+</script>
+
+<style>
+  .flow-schedule__modal[hidden] {
+    display: none;
+  }
+
+  .flow-schedule__modal {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .flow-schedule__modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgb(26 35 50 / 55%);
+  }
+
+  .flow-schedule__modal-panel {
+    position: relative;
+    width: min(100%, 24rem);
+    padding: 1.75rem;
+    border-radius: 1.25rem;
+    background: #f5f0e6;
+    border: 2px solid rgb(74 50 31 / 12%);
+    box-shadow: 0 20px 56px rgb(74 50 31 / 28%);
+  }
+
+  .flow-schedule__modal-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border: none;
+    border-radius: 9999px;
+    background: transparent;
+    color: rgb(74 50 31 / 60%);
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .flow-schedule__modal-close:hover {
+    background: rgb(74 50 31 / 8%);
+    color: #4a321f;
+  }
+
+  .flow-schedule__modal-title {
+    margin: 0 2rem 0.25rem 0;
+    font-family: "Libre Baskerville", Georgia, serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #4a321f;
+    line-height: 1.25;
+  }
+
+  .flow-schedule__modal-city {
+    margin: 0 0 1rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #b05123;
+  }
+
+  .flow-schedule__modal-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .flow-schedule__modal-badge {
+    display: inline-block;
+    padding: 0.4rem 0.75rem;
+    border-radius: 9999px;
+    background: #4a321f;
+    color: #f5f0e6;
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+
+  .flow-schedule__modal-address {
+    margin-bottom: 1.5rem;
+    padding: 1.1rem 1.15rem;
+    border-radius: 0.85rem;
+    background: #fff;
+    border: 2px solid #b05123;
+    border-left-width: 5px;
+    box-shadow: 0 4px 16px rgb(176 81 35 / 15%);
+  }
+
+  .flow-schedule__modal-label {
+    margin: 0 0 0.4rem;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #b05123;
+  }
+
+  .flow-schedule__modal-address-text {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.5;
+    color: #4a321f;
+  }
+
+  .flow-schedule__modal-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border-radius: 9999px;
+    background: #b05123;
+    color: #f5f0e6;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgb(176 81 35 / 35%);
+    transition: background 0.15s ease, transform 0.15s ease;
+  }
+
+  .flow-schedule__modal-btn:hover {
+    background: #9a461e;
+    transform: translateY(-1px);
+  }
+</style>

@@ -222,13 +222,15 @@ export const flowSchedule = {
   locations: {
     garden: {
       id: "garden" as const,
-      city: "Dolores",
-      label: "Garden",
+      city: "Elche",
+      label: "Garden Training Center",
+      address: "C/ Xeste 14, Bajo, 03203 Elche (Alicante)",
     },
     aulaMind: {
       id: "aulaMind" as const,
-      city: "Elche",
-      label: "aula mind",
+      city: "Dolores",
+      label: "Aula Mind",
+      address: "Av. Alcalde José Rodríguez, 4, 03150 Dolores, Alicante",
     },
   },
   classes: [
