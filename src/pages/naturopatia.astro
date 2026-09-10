@@ -69,6 +69,19 @@ const page = servicePages.naturopatia;
                 </div>
 
                 {
+                  "sessionIntro" in offering && offering.sessionIntro && (
+                    <div class="mt-8 space-y-2">
+                      <p class="text-lg text-brown leading-snug text-justify">
+                        {offering.sessionIntro.lead}
+                      </p>
+                      <p class="font-serif text-xl lg:text-2xl font-bold text-brown leading-snug text-center">
+                        {offering.sessionIntro.statement}
+                      </p>
+                    </div>
+                  )
+                }
+
+                {
                   "faq" in offering && offering.faq && (
                     <details class="mt-8 group">
                       <summary class="cursor-pointer list-none font-semibold text-brown hover:text-terracotta transition-colors [&::-webkit-details-marker]:hidden">
@@ -85,10 +98,57 @@ const page = servicePages.naturopatia;
                           </svg>
                         </span>
                       </summary>
-                      <p class="mt-4 text-brown/75 leading-relaxed pl-0 text-justify">{offering.faq.answer}</p>
+                      <div class="mt-4 space-y-4">
+                        {(Array.isArray(offering.faq.answer)
+                          ? offering.faq.answer
+                          : [offering.faq.answer]
+                        ).map((paragraph) => (
+                          <p class="text-brown/75 leading-relaxed pl-0 text-justify">{paragraph}</p>
+                        ))}
+                      </div>
                     </details>
                   )
                 }
+
+                {
+                  "massageTypes" in offering && offering.massageTypes && (
+                    <details class="mt-8 group">
+                      <summary class="cursor-pointer list-none font-semibold text-brown hover:text-terracotta transition-colors [&::-webkit-details-marker]:hidden">
+                        <span class="inline-flex items-center gap-2">
+                          {offering.massageTypes.question}
+                          <svg
+                            class="h-4 w-4 shrink-0 transition-transform group-open:rotate-180"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                          >
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                          </svg>
+                        </span>
+                      </summary>
+                      <div class="mt-4 space-y-6">
+                        {offering.massageTypes.items.map((item) => (
+                          <div>
+                            <h3 class="font-semibold text-brown mb-2">{item.title}</h3>
+                            {item.body && (
+                              <p class="text-brown/75 leading-relaxed text-justify">{item.body}</p>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </details>
+                  )
+                }
+
+                <div class="mt-8">
+                  <a
+                    href={`/contacto?servicio=${encodeURIComponent(offering.contactService)}&mensaje=${encodeURIComponent(offering.contactMessage)}`}
+                    class="inline-flex items-center px-6 py-3 rounded-full bg-terracotta text-cream text-sm tracking-wide hover:bg-terracotta/90 transition-colors"
+                  >
+                    Reservar cita
+                  </a>
+                </div>
               </div>
             </article>
           </div>
@@ -100,7 +160,7 @@ const page = servicePages.naturopatia;
   <section class="py-16 lg:py-24">
     <div class="mx-auto max-w-6xl px-4 sm:px-6">
       <div class="p-8 rounded-3xl bg-cream-dark/50 text-center">
-        <p class="font-serif text-xl text-brown mb-4">¿Te gustaría saber más?</p>
+        <p class="font-serif text-xl text-brown mb-4">¿Te gustaría más información?</p>
         <a
           href="/contacto"
           class="inline-flex items-center px-6 py-3 rounded-full bg-terracotta text-cream text-sm tracking-wide hover:bg-terracotta/90 transition-colors"

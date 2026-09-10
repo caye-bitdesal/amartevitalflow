@@ -172,16 +172,29 @@ export const servicePages = {
           answer:
             "Las Flores de Bach son una terapia floral que acompaña el mundo emocional con delicadeza y respeto. Cada esencia actúa como un suave recordatorio de los recursos que ya existen en nuestro interior, ayudándonos a recuperar el equilibrio, la serenidad y la confianza para transitar los cambios de la vida desde un lugar más consciente.",
         },
+        contactService: "Consulta floral",
+        contactMessage: "Hola, me gustaría una cita para una consulta floral.",
       },
       {
         title: "Consulta de naturopatía",
         paragraphs: [
           "La consulta de naturopatía es un espacio de escucha, comprensión y acompañamiento personalizado. A través de una visión global de la persona, buscamos comprender el origen de los desequilibrios y construir un abordaje adaptado a sus necesidades, teniendo en cuenta el cuerpo, las emociones y el estilo de vida.",
-          "La primera sesión tiene una duración aproximada de 1h a 1h30 y puede realizarse de forma presencial o online, para ofrecer un acompañamiento accesible y adaptado a las necesidades de cada persona. Durante este encuentro profundizamos en el motivo de consulta, el historial de salud, los hábitos de vida y otros aspectos relevantes para construir una visión completa de la persona. A partir de esta valoración inicial se establece un plan de acompañamiento personalizado con pautas y objetivos adaptados a sus necesidades.",
-          "Las sesiones de seguimiento se realizan de forma online y se programan según la evolución y las necesidades de cada persona. Son un espacio para valorar los cambio observados, resolver dudas, revisar los objetivos y adaptar las recomendaciones, permitiendo que el acompañamiento evolucione al mismo ritmo que el proceso de cada persona.",
         ],
         image: "/imagen-consulta-chat.png",
         imageAlt: "Espacio de consulta",
+        sessionIntro: {
+          lead: "Prevención y mejoría de los hábitos de vida según tus necesidades.",
+          statement: "Cuidamos juntos tu cuerpo y tu mente.",
+        },
+        faq: {
+          question: "¿Cómo se desarrolla la sesión?",
+          answer: [
+            "La primera sesión tiene una duración aproximada de 1h a 1h30 y puede realizarse de forma presencial o online, para ofrecer un acompañamiento accesible y adaptado a las necesidades de cada persona. Durante este encuentro profundizamos en el motivo de consulta, el historial de salud, los hábitos de vida y otros aspectos relevantes para construir una visión completa de la persona. A partir de esta valoración inicial se establece un plan de acompañamiento personalizado con pautas y objetivos adaptados a sus necesidades.",
+            "Las sesiones de seguimiento se realizan de forma online y se programan según la evolución y las necesidades de cada persona. Son un espacio para valorar los cambio observados, resolver dudas, revisar los objetivos y adaptar las recomendaciones, permitiendo que el acompañamiento evolucione al mismo ritmo que el proceso de cada persona.",
+          ],
+        },
+        contactService: "Consulta de Naturopatía",
+        contactMessage: "Hola, me gustaría una cita para una consulta de naturopatía.",
       },
       {
         title: "Masajes",
@@ -191,6 +204,25 @@ export const servicePages = {
         ],
         image: "/picture-masage-chat.png",
         imageAlt: "Una persona está boca abajo sobre una camilla recibiendo un masaje.",
+        massageTypes: {
+          question: "Tipos de masajes",
+          items: [
+            {
+              title: "Masaje Fusión",
+              body: "",
+            },
+            {
+              title: "Reflexología podal",
+              body: "",
+            },
+            {
+              title: "Metamórfico fusión",
+              body: "",
+            },
+          ],
+        },
+        contactService: "Masajes",
+        contactMessage: "Hola, me gustaría una cita para un masaje.",
       },
     ],
   },

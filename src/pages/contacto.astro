@@ -138,7 +138,9 @@ const formNext = `${site.url}/contacto?enviado=1`;
               class="w-full px-4 py-3 rounded-xl border border-cream-dark bg-cream/50 text-brown focus:outline-none focus:ring-2 focus:ring-sage/40"
             >
               <option value="">Selecciona una opción</option>
+              <option value="Consulta floral">Consulta floral</option>
               <option value="Consulta de Naturopatía">Consulta de Naturopatía</option>
+              <option value="Masajes">Masajes</option>
               <option value="Movimiento Flow">Movimiento Flow</option>
               <option value="Talleres y eventos">Talleres y eventos</option>
               <option value="Otro">Otro</option>
@@ -170,6 +172,8 @@ const formNext = `${site.url}/contacto?enviado=1`;
 <script define:vars={{ whatsappNumber: contact.whatsapp }}>
   const serviceFromUrl = {
     naturopatia: "Consulta de Naturopatía",
+    floral: "Consulta floral",
+    masajes: "Masajes",
     movimiento: "Movimiento Flow",
     talleres: "Talleres y eventos",
     otro: "Otro",
@@ -186,6 +190,7 @@ const formNext = `${site.url}/contacto?enviado=1`;
 
   const servicio = params.get("servicio");
   const mensaje = params.get("mensaje");
+  const contactForm = document.getElementById("contact-form");
 
   if (servicio) {
     const serviceSelect = document.getElementById("service");
@@ -204,7 +209,9 @@ const formNext = `${site.url}/contacto?enviado=1`;
     if (whatsappLink instanceof HTMLAnchorElement) {
       whatsappLink.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(mensaje)}`;
     }
+  }
 
-    whatsappLink?.scrollIntoView({ behavior: "smooth", block: "center" });
+  if (servicio || mensaje) {
+    contactForm?.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 </script>
