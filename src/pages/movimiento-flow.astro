@@ -16,7 +16,7 @@ const page = servicePages.movimientoFlow;
       {"subtitle" in page && page.subtitle && (
         <p class="font-serif text-2xl lg:text-3xl text-brown italic leading-relaxed mb-6">{page.subtitle}</p>
       )}
-      <p class="text-lg text-brown/80 leading-relaxed mb-12">{page.intro}</p>
+      <p class="text-lg text-brown/80 leading-relaxed mb-12 text-justify">{page.intro}</p>
 
       <div class="space-y-10">
         {
@@ -26,11 +26,11 @@ const page = servicePages.movimientoFlow;
               {"paragraphs" in section && section.paragraphs ? (
                 <div class="space-y-4">
                   {section.paragraphs.map((paragraph) => (
-                    <p class="text-brown/75 leading-relaxed">{paragraph}</p>
+                    <p class="text-brown/75 leading-relaxed text-justify">{paragraph}</p>
                   ))}
                 </div>
               ) : (
-                "body" in section && <p class="text-brown/75 leading-relaxed">{section.body}</p>
+                "body" in section && <p class="text-brown/75 leading-relaxed text-justify">{section.body}</p>
               )}
               {"showSchedule" in section && section.showSchedule && <FlowScheduleCalendar />}
             </article>
@@ -41,7 +41,7 @@ const page = servicePages.movimientoFlow;
       {"pricing" in page && page.pricing && (
         <article class="mt-10">
           <h2 class="font-serif text-2xl text-brown mb-4">{page.pricing.title}</h2>
-          <p class="text-brown/75 leading-relaxed mb-6">{page.pricing.intro}</p>
+          <p class="text-brown/75 leading-relaxed mb-6 text-justify">{page.pricing.intro}</p>
           <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {
               page.pricing.blocks.map((block) => (
@@ -80,7 +80,7 @@ const page = servicePages.movimientoFlow;
           href="/contacto"
           class="inline-flex items-center px-6 py-3 rounded-full bg-terracotta text-cream text-sm tracking-wide hover:bg-terracotta/90 transition-colors"
         >
-          Reserva una sesión
+          Contactar
         </a>
       </div>
     </div>

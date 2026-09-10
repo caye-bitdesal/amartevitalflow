@@ -24,26 +24,80 @@ import {
       <div class="absolute inset-0 bg-cream/55"></div>
     </div>
 
-    <div class="relative text-center max-w-2xl mx-auto py-20">
+    <div class="relative text-center max-w-3xl mx-auto py-20">
       <img
         src="/logo.png"
         alt={site.name}
         class="mx-auto h-40 sm:h-52 lg:h-64 w-auto mb-10"
       />
-      <p class="font-serif text-xl sm:text-2xl lg:text-[1.65rem] text-brown leading-relaxed mb-10">
+      <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-brown leading-tight mb-6">
+        {site.heroHeadline}
+      </h1>
+      <p class="font-serif text-lg sm:text-xl lg:text-[1.4rem] text-brown/80 leading-relaxed mb-10 max-w-2xl mx-auto">
         {site.tagline}
       </p>
       <a
         href="/contacto"
         class="inline-flex items-center px-8 py-3.5 rounded-full bg-terracotta text-cream font-medium tracking-wide hover:bg-terracotta/90 transition-colors shadow-sm"
       >
-        Reserva
+        Contactar
       </a>
     </div>
   </section>
 
-  <!-- What is -->
+  <!-- Services -->
+  <section class="py-20 lg:py-28 bg-cream-dark/30" id="servicios">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="text-center mb-14">
+        <h2 class="font-serif text-3xl lg:text-4xl text-brown mb-4">¿Cómo te puedo acompañar?</h2>
+        <p class="text-brown/70 max-w-xl mx-auto">
+          Tres caminos para reconectar con tu bienestar: comprender, experimentar y expresar.
+        </p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {services.map((service) => <ServiceCard {...service} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- Manifesto + First step -->
   <section class="py-20 lg:py-28 bg-white">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+        <div>
+          <p class="font-serif text-2xl lg:text-3xl text-brown mb-8 leading-snug">{manifesto.lead}</p>
+          <ul class="space-y-1 mb-8 text-center">
+            {
+              manifesto.items.map((item) => (
+                <li class="text-lg text-brown/80 italic leading-snug">{item}</li>
+              ))
+            }
+          </ul>
+          {
+            manifesto.paragraphs.map((p) => (
+              <p class="text-brown/75 leading-relaxed mb-6 last:mb-0 text-justify">{p}</p>
+            ))
+          }
+        </div>
+
+        <div>
+          <p class="text-brown/70 mb-2">{firstStep.transition}</p>
+          <p class="font-serif text-3xl lg:text-4xl text-terracotta mb-8 leading-snug">{firstStep.highlight}</p>
+          <h2 class="font-serif text-2xl lg:text-3xl text-brown mb-6 leading-snug">
+            {firstStep.title}
+          </h2>
+          {
+            firstStep.body.split("\n\n").map((p) => (
+              <p class="text-brown/75 leading-relaxed mb-4 last:mb-0 text-justify">{p}</p>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What is -->
+  <section class="py-20 lg:py-28">
     <div class="mx-auto max-w-3xl px-4 sm:px-6">
       <h2 class="font-serif text-3xl lg:text-4xl text-brown text-center mb-8">{whatIs.title}</h2>
       <p class="font-serif text-xl text-terracotta text-center leading-relaxed mb-10">
@@ -51,23 +105,31 @@ import {
       </p>
       {
         whatIs.paragraphs.map((p) => (
-          <p class="text-brown/75 leading-relaxed mb-6">{p}</p>
+          <p class="text-brown/75 leading-relaxed mb-6 text-justify">{p}</p>
         ))
       }
     </div>
   </section>
 
   <!-- Intro -->
-  <section class="py-20 lg:py-28">
+  <section class="py-20 lg:py-28 bg-white">
     <div class="mx-auto max-w-6xl px-4 sm:px-6">
       <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-        <div class="space-y-6">
+        <div class="space-y-2">
+          <p class="font-serif text-xl sm:text-2xl lg:text-[1.75rem] text-brown leading-snug text-justify">
+            <span class="text-brown/45" aria-hidden="true">“</span>
+            {intro.feelings[0]}
+          </p>
           {
-            intro.feelings.map((line) => (
-              <p class="font-serif text-2xl lg:text-3xl text-brown leading-snug">{line}</p>
+            intro.feelings.slice(1, -1).map((line) => (
+              <p class="font-serif text-xl sm:text-2xl lg:text-[1.75rem] text-brown leading-snug text-justify pl-4 sm:pl-5">{line}</p>
             ))
           }
-          <p class="text-brown/80 leading-relaxed text-lg pt-4">{intro.closing}</p>
+          <p class="font-serif text-xl sm:text-2xl lg:text-[1.75rem] text-brown leading-snug text-justify pl-4 sm:pl-5">
+            {intro.feelings.at(-1)}
+            <span class="text-brown/45" aria-hidden="true">”</span>
+          </p>
+          <p class="text-brown/80 leading-relaxed text-lg pt-6 text-justify">{intro.closing}</p>
         </div>
         <div class="relative aspect-[4/5] rounded-[3rem] overflow-hidden bg-gradient-to-br from-sage/30 to-terracotta/20">
           <div class="absolute inset-0 flex items-center justify-center">
@@ -82,65 +144,6 @@ import {
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Manifesto -->
-  <section class="py-20 lg:py-28 bg-white">
-    <div class="mx-auto max-w-3xl px-4 sm:px-6 text-center">
-      <p class="font-serif text-2xl lg:text-3xl text-brown mb-10">{manifesto.lead}</p>
-      <ul class="space-y-3 mb-12">
-        {
-          manifesto.items.map((item) => (
-            <li class="text-lg text-brown/80">{item}</li>
-          ))
-        }
-      </ul>
-      {
-        manifesto.paragraphs.map((p) => (
-          <p class="text-brown/75 leading-relaxed mb-6 text-left lg:text-center">{p}</p>
-        ))
-      }
-    </div>
-  </section>
-
-  <!-- First step -->
-  <section class="py-20 lg:py-28">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6">
-      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-        <div class="relative aspect-square rounded-[3rem] overflow-hidden bg-gradient-to-tr from-terracotta/20 via-cream to-sage/30 order-2 lg:order-1">
-          <div class="absolute inset-0 flex items-center justify-center text-brown/40 text-sm">
-            Imagen placeholder
-          </div>
-        </div>
-        <div class="order-1 lg:order-2">
-          <p class="text-brown/70 mb-2">{firstStep.transition}</p>
-          <p class="font-serif text-3xl lg:text-4xl text-terracotta mb-8">{firstStep.highlight}</p>
-          <h2 class="font-serif text-2xl lg:text-3xl text-brown mb-6 leading-snug">
-            {firstStep.title}
-          </h2>
-          {
-            firstStep.body.split("\n\n").map((p) => (
-              <p class="text-brown/75 leading-relaxed mb-4">{p}</p>
-            ))
-          }
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Services -->
-  <section class="py-20 lg:py-28 bg-cream-dark/30" id="servicios">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6">
-      <div class="text-center mb-14">
-        <h2 class="font-serif text-3xl lg:text-4xl text-brown mb-4">¿Cómo puedo acompañarte?</h2>
-        <p class="text-brown/70 max-w-xl mx-auto">
-          Tres caminos para reconectar con tu bienestar: comprender, experimentar y expresar.
-        </p>
-      </div>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {services.map((service) => <ServiceCard {...service} />)}
       </div>
     </div>
   </section>

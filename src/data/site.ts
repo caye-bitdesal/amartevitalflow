@@ -1,5 +1,6 @@
 export const site = {
   name: "Am'Arte Vital Flow",
+  heroHeadline: "Abordamos juntos la raíz de tus dolencias.",
   tagline:
     "Movimiento consciente, alimentación saludable y bienestar emocional para volver a habitarte.",
   description:
@@ -135,8 +136,25 @@ export const servicePages = {
   naturopatia: {
     title: "Comprender",
     eyebrow: "COMPRENDER",
+    headerImages: [
+      {
+        src: "/consulta-floral.png",
+        alt: "Frascos de Flores de Bach sobre una mesa de madera en un espacio de consulta",
+      },
+      {
+        src: "/imagen-consulta-chat.png",
+        alt: "Espacio de consulta",
+      },
+      {
+        src: "/picture-masage-chat.png",
+        alt: "Una persona está boca abajo sobre una camilla recibiendo un masaje.",
+      },
+    ],
     intro: [
       "Todo proceso de bienestar comienza por comprender. Antes de buscar soluciones, es importante entender qué expresa el cuerpo, qué emociones necesitan ser escuchadas y qué factores pueden estar influyendo en el equilibrio de cada persona.",
+    ],
+    introHighlight: "Un acompañamiento personalizado.",
+    introContinued: [
       "Cada historia es única y merece un acompañamiento adaptado a sus necesidades. Por ello, este espacio reúne diferentes formas de acompañamiento que atienden el bienestar físico, emocional y mental desde una mirada integrativa.",
       "Ya sea a través de la naturopatía, la terapia floral o el masaje, el objetivo es favorecer un equilibrio profundo de forma respetuosa, personalizada y consciente.",
     ],
@@ -275,8 +293,6 @@ export const flowSchedule = {
   classes: [
     { day: "monday" as const, start: "07:30", end: "08:30", location: "aulaMind" as const, label: "Flow" },
     { day: "monday" as const, start: "15:30", end: "16:30", location: "garden" as const, label: "Flow" },
-    { day: "monday" as const, start: "16:30", end: "17:30", location: "garden" as const, label: "Flow" },
-    { day: "monday" as const, start: "20:00", end: "21:00", location: "garden" as const, label: "Flow" },
     { day: "tuesday" as const, start: "16:00", end: "17:00", location: "garden" as const, label: "Flow" },
     { day: "tuesday" as const, start: "17:00", end: "18:00", location: "garden" as const, label: "Flow" },
     { day: "wednesday" as const, start: "10:00", end: "11:00", location: "garden" as const, label: "Flow" },
@@ -284,6 +300,8 @@ export const flowSchedule = {
     { day: "wednesday" as const, start: "13:45", end: "14:45", location: "garden" as const, label: "Flow" },
     { day: "wednesday" as const, start: "14:45", end: "15:45", location: "garden" as const, label: "Flow" },
     { day: "thursday" as const, start: "17:30", end: "18:30", location: "aulaMind" as const, label: "Flow" },
+    { day: "friday" as const, start: "07:00", end: "08:00", location: "garden" as const, label: "Flow" },
+    { day: "friday" as const, start: "08:00", end: "09:00", location: "garden" as const, label: "Flow" },
   ],
 } as const;
 

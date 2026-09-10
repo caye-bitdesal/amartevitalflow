@@ -1,13 +1,14 @@
 ---
 import { flowSchedule } from "../data/site";
 
-const dayOrder = ["monday", "tuesday", "wednesday", "thursday"] as const;
+const dayOrder = ["monday", "tuesday", "wednesday", "thursday", "friday"] as const;
 
 const dayLabels: Record<(typeof dayOrder)[number], string> = {
   monday: "Lunes",
   tuesday: "Martes",
   wednesday: "Miércoles",
   thursday: "Jueves",
+  friday: "Viernes",
 };
 
 const classesByDay = dayOrder.map((day) => ({
@@ -33,7 +34,7 @@ function buildReserveMessage(
 ---
 
 <div class="mt-8" data-flow-schedule>
-  <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+  <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
     {
       classesByDay.map(({ day, label, classes }) => (
         <div class="rounded-2xl bg-cream-dark/40 p-4">
@@ -60,7 +61,7 @@ function buildReserveMessage(
                       data-city={location.city}
                       data-address={location.address}
                       data-reserve-message={reserveMessage}
-                      aria-label={`Reservar clase ${cls.label}, ${dayLabels[day]} ${cls.start} en ${location.label}`}
+                      aria-label={`Contactar sobre clase ${cls.label}, ${dayLabels[day]} ${cls.start} en ${location.label}`}
                     >
                       <p class="font-medium text-brown">{cls.label}</p>
                       <p class="text-brown/70 text-xs mt-0.5">{location.label}</p>
@@ -121,7 +122,7 @@ function buildReserveMessage(
         <p class="flow-schedule__modal-label">Dirección</p>
         <p class="flow-schedule__modal-address-text" data-flow-modal-address></p>
       </div>
-      <a href="/contacto" class="flow-schedule__modal-btn" data-flow-modal-reserve> Reservar </a>
+      <a href="/contacto" class="flow-schedule__modal-btn" data-flow-modal-reserve> Contactar </a>
     </div>
   </div>
 </div>

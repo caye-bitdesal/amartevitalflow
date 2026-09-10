@@ -30,7 +30,7 @@ const formNext = `${site.url}/contacto?enviado=1`;
             founder.paragraphs.map((p, i) => (
               <p
                 class:list={[
-                  "leading-relaxed mb-4",
+                  "leading-relaxed mb-4 text-justify",
                   i === founder.paragraphs.length - 1
                     ? "font-medium text-brown text-lg mt-6"
                     : "text-brown/75",
@@ -50,7 +50,7 @@ const formNext = `${site.url}/contacto?enviado=1`;
       <div class="grid lg:grid-cols-2 gap-12 lg:gap-16">
         <div>
           <h2 class="font-serif text-3xl lg:text-4xl text-brown mb-6">Contacto</h2>
-          <p class="text-brown/75 leading-relaxed mb-10">
+          <p class="text-brown/75 leading-relaxed mb-10 text-justify">
             Si quieres reservar una sesión, preguntar sobre un taller o simplemente saber más sobre
             cómo puedo acompañarte, escríbeme. Responderé lo antes posible.
           </p>

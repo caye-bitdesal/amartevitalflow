@@ -1,27 +1,40 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ImageHeroCarousel from "../components/ImageHeroCarousel.astro";
 import { servicePages } from "../data/site";
 
 const page = servicePages.naturopatia;
 ---
 
-<BaseLayout title={page.title} description={page.intro.join(" ")}>
+<BaseLayout title={page.title} description={[...page.intro, ...page.introContinued].join(" ")}>
+  <ImageHeroCarousel eyebrow={page.eyebrow} images={page.headerImages} />
+
   <section class="py-16 lg:py-24">
     <div class="mx-auto max-w-6xl px-4 sm:px-6">
-      <p class="text-xs font-medium tracking-[0.2em] text-terracotta mb-4">{page.eyebrow}</p>
-      <h1 class="font-serif text-4xl lg:text-5xl text-brown mb-8">{page.title}</h1>
-
-      <div class="max-w-3xl space-y-6 mb-16 lg:mb-20">
+      <div class="max-w-3xl space-y-4 mb-16 lg:mb-20">
         {
           page.intro.map((paragraph) => (
-            <p class="text-lg text-brown/80 leading-relaxed">{paragraph}</p>
+            <p class="text-lg text-brown/80 leading-snug text-justify italic">{paragraph}</p>
+          ))
+        }
+        <p class="font-serif text-3xl lg:text-4xl font-bold text-brown leading-tight text-right ml-2 sm:ml-4 lg:ml-6">
+          {page.introHighlight}
+        </p>
+        {
+          page.introContinued.map((paragraph) => (
+            <p class="text-lg text-brown/80 leading-snug text-justify italic">{paragraph}</p>
           ))
         }
       </div>
+    </div>
+  </section>
 
-      <div class="space-y-20 lg:space-y-28">
-        {
-          page.offerings.map((offering, index) => (
+  {
+    page.offerings.map((offering, index) => {
+      const hasBand = index === 0 || index === 2;
+      return (
+        <section class:list={["py-16 lg:py-20", hasBand && "bg-cream-dark/60"]}>
+          <div class="mx-auto max-w-6xl px-4 sm:px-6">
             <article
               class:list={[
                 "grid lg:grid-cols-2 gap-10 lg:gap-16 items-center",
@@ -50,7 +63,7 @@ const page = servicePages.naturopatia;
                 <div class="space-y-4">
                   {
                     offering.paragraphs.map((paragraph) => (
-                      <p class="text-brown/75 leading-relaxed">{paragraph}</p>
+                      <p class="text-brown/75 leading-relaxed text-justify">{paragraph}</p>
                     ))
                   }
                 </div>
@@ -72,23 +85,27 @@ const page = servicePages.naturopatia;
                           </svg>
                         </span>
                       </summary>
-                      <p class="mt-4 text-brown/75 leading-relaxed pl-0">{offering.faq.answer}</p>
+                      <p class="mt-4 text-brown/75 leading-relaxed pl-0 text-justify">{offering.faq.answer}</p>
                     </details>
                   )
                 }
               </div>
             </article>
-          ))
-        }
-      </div>
+          </div>
+        </section>
+      );
+    })
+  }
 
-      <div class="mt-16 lg:mt-24 p-8 rounded-3xl bg-cream-dark/50 text-center">
+  <section class="py-16 lg:py-24">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+      <div class="p-8 rounded-3xl bg-cream-dark/50 text-center">
         <p class="font-serif text-xl text-brown mb-4">¿Te gustaría saber más?</p>
         <a
           href="/contacto"
           class="inline-flex items-center px-6 py-3 rounded-full bg-terracotta text-cream text-sm tracking-wide hover:bg-terracotta/90 transition-colors"
         >
-          Reserva una sesión
+          Contactar
         </a>
       </div>
     </div>
