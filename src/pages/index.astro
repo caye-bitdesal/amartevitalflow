@@ -14,34 +14,58 @@ import {
 
 <BaseLayout>
   <!-- Hero -->
-  <section class="relative min-h-[85vh] flex items-center justify-center px-4 sm:px-6 overflow-hidden">
-    <div class="absolute inset-0" aria-hidden="true">
-      <img
-        src="/hero-bg.png"
-        alt=""
-        class="absolute inset-0 h-full w-full object-cover blur-[0.2rem]"
-      />
-      <div class="absolute inset-0 bg-cream/55"></div>
-    </div>
+  <section
+    class="relative w-full h-[55vh] lg:h-[65vh] overflow-hidden bg-brown"
+    aria-label={site.name}
+  >
+    <div class="absolute inset-0 grid grid-cols-[minmax(0,0.9fr)_minmax(0,1.7fr)_minmax(0,0.9fr)]">
+      <div class="relative min-w-0 overflow-hidden" aria-hidden="true">
+        <img
+          src="/picture-masage-chat.png"
+          alt=""
+          class="absolute inset-0 h-full w-full object-cover"
+        />
+      </div>
 
-    <div class="relative text-center max-w-3xl mx-auto py-20">
-      <img
-        src="/logo.png"
-        alt={site.name}
-        class="mx-auto h-40 sm:h-52 lg:h-64 w-auto mb-10"
-      />
-      <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-brown leading-tight mb-6">
-        {site.heroHeadline}
-      </h1>
-      <p class="font-serif text-lg sm:text-xl lg:text-[1.4rem] text-brown/80 leading-relaxed mb-10 max-w-2xl mx-auto">
-        {site.tagline}
-      </p>
-      <a
-        href="/contacto"
-        class="inline-flex items-center px-8 py-3.5 rounded-full bg-terracotta text-cream font-medium tracking-wide hover:bg-terracotta/90 transition-colors shadow-sm"
-      >
-        Contactar
-      </a>
+      <div class="relative min-w-0 overflow-hidden">
+        <img
+          src="/hero-bg.png"
+          alt=""
+          class="absolute inset-0 h-full w-full object-cover blur-[0.2rem]"
+          aria-hidden="true"
+        />
+        <div class="absolute inset-0 bg-cream/55" aria-hidden="true"></div>
+
+        <div class="relative z-10 flex h-full items-center justify-center px-4 sm:px-6">
+          <div class="text-center w-full max-w-3xl py-3 sm:py-4">
+            <img
+              src="/logo.png"
+              alt={site.name}
+              class="mx-auto h-40 sm:h-52 lg:h-64 w-auto mb-4 sm:mb-6"
+            />
+            <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-brown leading-tight mb-3 sm:mb-4">
+              {site.heroHeadline}
+            </h1>
+            <p class="font-serif text-lg sm:text-xl lg:text-[1.4rem] text-brown/80 leading-relaxed mb-5 sm:mb-6 max-w-2xl mx-auto">
+              {site.tagline}
+            </p>
+            <a
+              href="/contacto"
+              class="inline-flex items-center px-8 py-3.5 rounded-full bg-terracotta text-cream font-medium tracking-wide hover:bg-terracotta/90 transition-colors shadow-sm"
+            >
+              Contactar
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative min-w-0 overflow-hidden" aria-hidden="true">
+        <img
+          src="/consulta-floral.png"
+          alt=""
+          class="absolute inset-0 h-full w-full object-cover"
+        />
+      </div>
     </div>
   </section>
 
