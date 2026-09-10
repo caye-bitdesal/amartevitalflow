@@ -9,6 +9,8 @@ export const site = {
 
 export const contact = {
   email: "info.amartevitalflow@gmail.com",
+  // Tras activar FormSubmit, sustituye el email por el código hash del email de confirmación.
+  formSubmitEndpoint: "info.amartevitalflow@gmail.com",
   phone: "+34 623 100 112",
   whatsapp: "34623100112",
   location: "Elche, Alicante",
