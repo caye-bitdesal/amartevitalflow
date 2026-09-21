@@ -12,17 +12,17 @@ const { title, eyebrow, intro, sections } = Astro.props;
 ---
 
 <BaseLayout title={title}>
-  <section class="py-16 lg:py-24">
-    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+  <section class="py-10 lg:py-24">
+    <div class="mx-auto max-w-3xl px-6">
       <p class="text-xs font-medium tracking-[0.2em] text-terracotta mb-4 text-center">{eyebrow}</p>
-      <h1 class="mb-2 flex items-center justify-center gap-4 text-center font-serif text-4xl lg:text-5xl text-brown">
+      <h1 class="mb-2 flex items-center justify-center gap-3 sm:gap-4 text-center font-serif text-3xl sm:text-4xl lg:text-5xl text-brown">
         <span
-          class="h-px w-16 shrink-0 bg-gradient-to-r from-transparent via-brown/50 to-transparent sm:w-24"
+          class="hidden h-px w-16 shrink-0 bg-gradient-to-r from-transparent via-brown/50 to-transparent sm:block sm:w-24"
           aria-hidden="true"
         ></span>
         <span>{title}</span>
         <span
-          class="h-px w-16 shrink-0 bg-gradient-to-r from-transparent via-brown/50 to-transparent sm:w-24"
+          class="hidden h-px w-16 shrink-0 bg-gradient-to-r from-transparent via-brown/50 to-transparent sm:block sm:w-24"
           aria-hidden="true"
         ></span>
       </h1>

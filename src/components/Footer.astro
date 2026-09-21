@@ -3,9 +3,9 @@ import { site, legal, contact } from "../data/site";
 ---
 
 <footer class="bg-brown text-cream/90">
-  <div class="mx-auto max-w-6xl px-4 sm:px-6 py-12 lg:py-16">
-    <div class="grid gap-10 md:grid-cols-3">
-      <div>
+  <div class="mx-auto max-w-6xl px-6 py-8 lg:py-16">
+    <div class="grid gap-8 md:grid-cols-3 md:gap-10 text-center md:text-left">
+      <div class="flex flex-col items-center md:items-start">
         <img src="/logo.png" alt={site.name} class="h-14 w-auto mb-4 brightness-0 invert opacity-90" />
         <p class="text-sm text-cream/70 leading-relaxed max-w-xs">{site.tagline}</p>
       </div>
@@ -43,7 +43,7 @@ import { site, legal, contact } from "../data/site";
       </div>
     </div>
 
-    <div class="mt-12 pt-8 border-t border-cream/10 text-center text-sm text-cream/50">
+    <div class="mt-8 lg:mt-12 pt-6 lg:pt-8 border-t border-cream/10 text-center text-sm text-cream/50">
       <p>&copy; {new Date().getFullYear()} {site.name}. Todos los derechos reservados.</p>
     </div>
   </div>

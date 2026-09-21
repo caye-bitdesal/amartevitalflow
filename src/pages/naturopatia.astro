@@ -9,8 +9,8 @@ const page = servicePages.naturopatia;
 <BaseLayout title={page.title} description={[...page.intro, ...page.introContinued].join(" ")}>
   <ImageHeroCarousel eyebrow={page.eyebrow} images={page.headerImages} />
 
-  <section class="py-16 lg:py-24">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+  <section class="py-10 lg:py-24">
+    <div class="mx-auto max-w-6xl px-6">
       <div class="max-w-3xl space-y-4 mb-16 lg:mb-20">
         {
           page.intro.map((paragraph) => (
@@ -33,8 +33,8 @@ const page = servicePages.naturopatia;
     page.offerings.map((offering, index) => {
       const hasBand = index === 0 || index === 2;
       return (
-        <section class:list={["py-16 lg:py-20", hasBand && "bg-cream-dark/60"]}>
-          <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <section class:list={["py-10 lg:py-20", hasBand && "bg-cream-dark/60"]}>
+          <div class="mx-auto max-w-6xl px-6">
             <article
               class:list={[
                 "grid lg:grid-cols-2 gap-10 lg:gap-16",
@@ -239,8 +239,8 @@ const page = servicePages.naturopatia;
     })
   }
 
-  <section class="py-16 lg:py-24">
-    <div class="mx-auto max-w-6xl px-4 sm:px-6">
+  <section class="py-10 lg:py-24">
+    <div class="mx-auto max-w-6xl px-6">
       <div class="p-8 rounded-3xl bg-cream-dark/50 text-center">
         <p class="font-serif text-xl text-brown mb-4">¿Te gustaría más información?</p>
         <a

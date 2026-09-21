@@ -2,9 +2,9 @@
 import { testimonials } from "../data/site";
 ---
 
-<section class="py-20 lg:py-28 bg-cream-dark/40" aria-label="Testimonios">
-  <div class="mx-auto max-w-6xl px-4 sm:px-6">
-    <h2 class="font-serif text-3xl lg:text-4xl text-brown text-center mb-12">
+<section class="py-10 lg:py-28 bg-cream-dark/40" aria-label="Testimonios">
+  <div class="mx-auto max-w-6xl px-6">
+    <h2 class="font-serif text-3xl lg:text-4xl text-brown text-center mb-6 lg:mb-12">
       Palabras de quienes han recorrido este camino conmigo:
     </h2>
 
@@ -13,7 +13,7 @@ import { testimonials } from "../data/site";
         <div id="testimonial-slides" class="flex transition-transform duration-500 ease-out">
           {
             testimonials.map((item) => (
-              <blockquote class="w-full shrink-0 px-8 py-12 lg:px-16 lg:py-16 bg-white text-center">
+              <blockquote class="w-full shrink-0 px-8 py-8 lg:px-16 lg:py-16 bg-white text-center">
                 <p class="font-serif text-xl lg:text-2xl text-brown leading-relaxed italic mb-8">
                   "{item.quote}"
                 </p>

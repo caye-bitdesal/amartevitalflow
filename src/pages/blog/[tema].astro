@@ -18,16 +18,16 @@ const articles = blog.articles.filter((article) => article.topic === topic.slug)
   title={`${topic.title} | Blog`}
   description={`Artículos sobre ${topic.title.toLowerCase()} en el blog de Am'Arte Vital Flow.`}
 >
-  <section class="py-16 lg:py-24">
-    <div class="mx-auto max-w-3xl px-4 sm:px-6">
-      <h1 class="mb-6 flex items-center justify-center gap-4 text-center font-serif text-4xl lg:text-5xl text-brown">
+  <section class="py-10 lg:py-24">
+    <div class="mx-auto max-w-3xl px-6">
+      <h1 class="mb-6 flex items-center justify-center gap-3 sm:gap-4 text-center font-serif text-3xl sm:text-4xl lg:text-5xl text-brown">
         <span
-          class="h-px w-16 shrink-0 bg-gradient-to-r from-transparent via-brown/50 to-transparent sm:w-24"
+          class="hidden h-px w-16 shrink-0 bg-gradient-to-r from-transparent via-brown/50 to-transparent sm:block sm:w-24"
           aria-hidden="true"
         ></span>
         <span>{blog.title}</span>
         <span
-          class="h-px w-16 shrink-0 bg-gradient-to-r from-transparent via-brown/50 to-transparent sm:w-24"
+          class="hidden h-px w-16 shrink-0 bg-gradient-to-r from-transparent via-brown/50 to-transparent sm:block sm:w-24"
           aria-hidden="true"
         ></span>
       </h1>
