@@ -15,10 +15,10 @@ import {
 <BaseLayout>
   <!-- Hero -->
   <section
-    class="relative w-full min-h-[32rem] sm:min-h-[36rem] lg:min-h-[40rem] bg-brown"
+    class="relative w-full min-h-[36rem] sm:min-h-[40rem] lg:min-h-[44rem] bg-brown"
     aria-label={site.name}
   >
-    <div class="grid min-h-[32rem] sm:min-h-[36rem] lg:min-h-[40rem] grid-cols-[minmax(0,0.9fr)_minmax(0,1.7fr)_minmax(0,0.9fr)]">
+    <div class="grid min-h-[36rem] sm:min-h-[40rem] lg:min-h-[44rem] grid-cols-[minmax(0,0.9fr)_minmax(0,1.7fr)_minmax(0,0.9fr)]">
       <div class="relative min-w-0 overflow-hidden" aria-hidden="true">
         <img
           src="/picture-masage-chat.png"
@@ -33,12 +33,12 @@ import {
             <img
               src="/logo.png"
               alt={site.name}
-              class="mx-auto mb-3 sm:mb-5 h-auto w-auto max-h-28 sm:max-h-40 lg:max-h-52 object-contain [@media(max-height:720px)]:max-h-28"
+              class="mx-auto h-40 sm:h-52 lg:h-64 w-auto mb-4 sm:mb-6"
             />
-            <h1 class="font-serif text-2xl sm:text-4xl lg:text-5xl font-bold text-brown leading-tight mb-3 sm:mb-4">
+            <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-brown leading-tight mb-3 sm:mb-4">
               {site.heroHeadline}
             </h1>
-            <p class="font-serif text-base sm:text-xl lg:text-[1.4rem] text-brown/80 leading-snug sm:leading-relaxed mb-5 sm:mb-6 max-w-2xl mx-auto">
+            <p class="font-serif text-lg sm:text-xl lg:text-[1.4rem] text-brown/80 leading-relaxed mb-5 sm:mb-6 max-w-2xl mx-auto">
               {site.tagline}
             </p>
             <a
