@@ -1,0 +1,27 @@
+---
+import { blog } from "../data/site";
+
+interface Props {
+  current?: string;
+}
+
+const { current } = Astro.props;
+---
+
+<nav class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12" aria-label="Temas del blog">
+  {
+    blog.topics.map((topic) => (
+      <a
+        href={`/blog/${topic.slug}`}
+        class:list={[
+          "flex min-h-[5.5rem] items-center justify-center rounded-2xl border px-4 py-5 text-center font-serif text-lg sm:text-xl transition-colors",
+          current === topic.slug
+            ? "border-terracotta bg-terracotta/10 text-terracotta"
+            : "border-brown/30 bg-white/70 text-brown hover:border-terracotta hover:text-terracotta",
+        ]}
+      >
+        {topic.title}
+      </a>
+    ))
+  }
+</nav>

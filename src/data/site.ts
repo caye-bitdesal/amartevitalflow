@@ -209,14 +209,34 @@ export const servicePages = {
           items: [
             {
               title: "Masaje Fusión",
-              body: "",
+              body: "Una experiencia completamente personalizada que combina diferentes técnicas de masaje, como el masaje relajante, el masaje tailandés y maniobras de drenaje, adaptándose a las necesidades del cuerpo durante la sesión. Cada movimiento nace de la escucha y permite que el masaje evolucione de forma natural, favoreciendo tanto el bienestar físico como el emocional.",
+              duration: "Duración 30 / 55 minutos",
+              price: "Precio 45 / 60€",
             },
             {
               title: "Reflexología podal",
-              body: "",
+              body: "Un masaje centrado en pies y gemelos que combina maniobras de relajación con la técnica de reflexología podal. Una forma de aliviar las tensiones acumuladas, de mejorar la sensación de ligereza y ofrecer un momento de descanso profundo a través de las zonas más olvidadas del cuerpo.",
+              duration: "Duración 45 minutos",
+              price: "Precio 45€",
             },
             {
               title: "Metamórfico fusión",
+              body: "Un masaje suave y profundamente emocional que integra la técnica metamórfica con un masaje de pies realizado con aceites esenciales. Esta combinación permite disfrutar del bienestar físico que proporciona el masaje mientras se favorece un trabajo más sutil de transformación interior.",
+              note: "El masaje metamórfico original se da en pies, manos y cabeza sin aceite. Es ideal para un trabajo emocional más profundo.",
+              noteHighlight: {
+                text: "masaje metamórfico",
+                href: "/blog",
+              },
+              duration: "Duración 45 minutos",
+              price: "Precio 45€",
+            },
+          ],
+        },
+        massageLocations: {
+          question: "Dónde recibir mi masaje",
+          items: [
+            {
+              title: "Aula Mind, Dolores",
               body: "",
             },
           ],
@@ -342,3 +362,23 @@ export const legal = [
   { label: "Política de privacidad", href: "/privacidad" },
   { label: "Política de cookies", href: "/cookies" },
 ] as const;
+
+export const blog = {
+  title: "Blog",
+  description:
+    "Artículos sobre técnicas de masaje, nutrición y temas relacionados con la salud y el bienestar.",
+  intro:
+    "Un espacio para profundizar en las técnicas que empleo, en nutrición y en otras claves de salud que pueden acompañarte en el día a día.",
+  topics: [
+    { slug: "tecnicas-manuales", title: "Técnicas manuales" },
+    { slug: "movimiento", title: "Movimiento" },
+    { slug: "alimentacion", title: "Alimentación" },
+    { slug: "remedios-naturales", title: "Remedios naturales" },
+  ],
+  articles: [] as ReadonlyArray<{
+    title: string;
+    excerpt: string;
+    href: string;
+    topic: string;
+  }>,
+} as const;

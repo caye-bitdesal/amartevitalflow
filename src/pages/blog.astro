@@ -1,0 +1,45 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import BlogTopics from "../components/BlogTopics.astro";
+import { blog } from "../data/site";
+---
+
+<BaseLayout title={blog.title} description={blog.description}>
+  <section class="py-16 lg:py-24">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <h1 class="mb-6 flex items-center justify-center gap-4 text-center font-serif text-4xl lg:text-5xl text-brown">
+        <span
+          class="h-px w-16 shrink-0 bg-gradient-to-r from-transparent via-brown/50 to-transparent sm:w-24"
+          aria-hidden="true"
+        ></span>
+        <span>{blog.title}</span>
+        <span
+          class="h-px w-16 shrink-0 bg-gradient-to-r from-transparent via-brown/50 to-transparent sm:w-24"
+          aria-hidden="true"
+        ></span>
+      </h1>
+      <p class="text-lg text-brown/75 leading-relaxed mb-10 text-center">{blog.intro}</p>
+
+      <BlogTopics />
+
+      {
+        blog.articles.length > 0 ? (
+          <div class="space-y-8">
+            {blog.articles.map((article) => (
+              <article class="border-b border-brown/15 pb-8 last:border-b-0">
+                <h2 class="font-serif text-2xl text-brown mb-3">
+                  <a href={article.href} class="hover:text-terracotta transition-colors">
+                    {article.title}
+                  </a>
+                </h2>
+                <p class="text-brown/75 leading-relaxed">{article.excerpt}</p>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <p class="text-brown/60 leading-relaxed text-center">Elige un tema para empezar a explorar.</p>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>

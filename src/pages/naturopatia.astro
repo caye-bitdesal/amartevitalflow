@@ -37,7 +37,8 @@ const page = servicePages.naturopatia;
           <div class="mx-auto max-w-6xl px-4 sm:px-6">
             <article
               class:list={[
-                "grid lg:grid-cols-2 gap-10 lg:gap-16 items-center",
+                "grid lg:grid-cols-2 gap-10 lg:gap-16",
+                index === 2 ? "items-start" : "items-center",
                 index % 2 === 1 && "lg:[&>*:first-child]:order-2",
               ]}
             >
@@ -127,12 +128,93 @@ const page = servicePages.naturopatia;
                           </svg>
                         </span>
                       </summary>
-                      <div class="mt-4 space-y-6">
+                      <div class="mt-4 space-y-6 rounded-xl border border-brown p-4 sm:p-5">
                         {offering.massageTypes.items.map((item) => (
                           <div>
                             <h3 class="font-semibold text-brown mb-2">{item.title}</h3>
-                            {item.body && (
+                            {"body" in item && item.body && (
                               <p class="text-brown/75 leading-relaxed text-justify">{item.body}</p>
+                            )}
+                            {"note" in item && item.note && (
+                              <p class="mt-1 text-sm text-brown/75 leading-relaxed text-justify italic">
+                                {"noteHighlight" in item && item.noteHighlight
+                                  ? (() => {
+                                      const highlight = item.noteHighlight;
+                                      const index = item.note.indexOf(highlight.text);
+                                      if (index < 0) return item.note;
+                                      return (
+                                        <>
+                                          {item.note.slice(0, index)}
+                                          <a
+                                            href={highlight.href}
+                                            class="font-semibold text-inherit no-underline hover:text-terracotta transition-colors"
+                                          >
+                                            {highlight.text}
+                                          </a>
+                                          {item.note.slice(index + highlight.text.length)}
+                                        </>
+                                      );
+                                    })()
+                                  : item.note}
+                              </p>
+                            )}
+                            {("duration" in item && item.duration) || ("price" in item && item.price) ? (
+                              <div class="mt-3 leading-tight">
+                                {"duration" in item && item.duration && (
+                                  <p class="text-terracotta">{item.duration}</p>
+                                )}
+                                {"price" in item && item.price && (
+                                  <p class="text-terracotta">{item.price}</p>
+                                )}
+                              </div>
+                            ) : null}
+                          </div>
+                        ))}
+                      </div>
+                    </details>
+                  )
+                }
+
+                {
+                  "massageLocations" in offering && offering.massageLocations && (
+                    <details class="mt-4 group">
+                      <summary class="cursor-pointer list-none font-semibold text-brown hover:text-terracotta transition-colors [&::-webkit-details-marker]:hidden">
+                        <span class="inline-flex items-center gap-2">
+                          {offering.massageLocations.question}
+                          <svg
+                            class="h-4 w-4 shrink-0 transition-transform group-open:rotate-180"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                          >
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                          </svg>
+                        </span>
+                      </summary>
+                      <div class="mt-4 space-y-6">
+                        {offering.massageLocations.items.map((item) => (
+                          <div>
+                            <h3 class="flex items-start gap-2 font-semibold text-brown mb-2">
+                              <svg
+                                class="mt-0.5 h-5 w-5 shrink-0 text-terracotta"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                                aria-hidden="true"
+                              >
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="1.75"
+                                  d="M12 21s7-5.33 7-11a7 7 0 10-14 0c0 5.67 7 11 7 11z"
+                                />
+                                <circle cx="12" cy="10" r="2.25" stroke-width="1.75" />
+                              </svg>
+                              <span>{item.title}</span>
+                            </h3>
+                            {item.body && (
+                              <p class="text-brown/75 leading-relaxed text-justify pl-7">{item.body}</p>
                             )}
                           </div>
                         ))}

@@ -12,9 +12,19 @@ const page = servicePages.movimientoFlow;
 
   <section class="py-16 lg:py-24">
     <div class="mx-auto max-w-3xl px-4 sm:px-6">
-      <h1 class="font-serif text-4xl lg:text-5xl text-brown mb-6">{page.title}</h1>
+      <h1 class="mb-2 flex items-center justify-center gap-4 text-center font-serif text-4xl lg:text-5xl text-brown">
+        <span
+          class="h-px w-16 shrink-0 bg-gradient-to-r from-transparent via-brown/50 to-transparent sm:w-24"
+          aria-hidden="true"
+        ></span>
+        <span>{page.title}</span>
+        <span
+          class="h-px w-16 shrink-0 bg-gradient-to-r from-transparent via-brown/50 to-transparent sm:w-24"
+          aria-hidden="true"
+        ></span>
+      </h1>
       {"subtitle" in page && page.subtitle && (
-        <p class="font-serif text-2xl lg:text-3xl text-brown italic leading-relaxed mb-6">{page.subtitle}</p>
+        <p class="font-serif text-2xl lg:text-3xl text-terracotta italic leading-snug mb-3">{page.subtitle}</p>
       )}
       <p class="text-lg text-brown/80 leading-relaxed mb-12 text-justify">{page.intro}</p>
 
@@ -22,7 +32,7 @@ const page = servicePages.movimientoFlow;
         {
           page.sections.map((section) => (
             <article>
-              <h2 class="font-serif text-2xl text-brown mb-4">{section.title}</h2>
+              <h2 class="font-serif text-2xl text-brown mb-3 text-center after:mx-auto after:mt-2 after:block after:h-px after:w-16 after:bg-gradient-to-r after:from-transparent after:via-brown/50 after:to-transparent after:content-['']">{section.title}</h2>
               {"paragraphs" in section && section.paragraphs ? (
                 <div class="space-y-4">
                   {section.paragraphs.map((paragraph) => (
@@ -40,7 +50,7 @@ const page = servicePages.movimientoFlow;
 
       {"pricing" in page && page.pricing && (
         <article class="mt-10">
-          <h2 class="font-serif text-2xl text-brown mb-4">{page.pricing.title}</h2>
+          <h2 class="font-serif text-2xl text-brown mb-3 text-center after:mx-auto after:mt-2 after:block after:h-px after:w-16 after:bg-gradient-to-r after:from-transparent after:via-brown/50 after:to-transparent after:content-['']">{page.pricing.title}</h2>
           <p class="text-brown/75 leading-relaxed mb-6 text-justify">{page.pricing.intro}</p>
           <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {
